@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sivua ei löytynyt — Lapin Hunajamarja</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0A1420">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230A1420'/%3E%3Ccircle cx='26' cy='30' r='11' fill='%235FE3B3'/%3E%3Ccircle cx='40' cy='38' r='11' fill='%232E9C82'/%3E%3C/svg%3E">
+<style>
+  /* Tarkoituksella tayysin itsenainen: ei ulkoisia fontteja eika kuvia,
+     jotta virhesivu latautuu aina ja heti. */
+  :root{
+    --ink:#0A1420; --aurora:#5FE3B3; --sun:#EFB94C;
+    --snow:#F6F8F7; --frost:#B9C7D1; --line:rgba(185,199,209,0.18);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    min-height:100svh;
+    display:flex;align-items:center;justify-content:center;
+    padding:40px 24px;
+    background:
+      radial-gradient(circle at 22% 14%, rgba(95,227,179,.10) 0%, transparent 46%),
+      radial-gradient(circle at 84% 82%, rgba(239,185,76,.09) 0%, transparent 44%),
+      linear-gradient(180deg,#060B12 0%, #0A1420 55%, #0F2036 100%);
+    color:var(--snow);
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  main{max-width:560px;}
+  .eyebrow{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:12px;letter-spacing:0.14em;text-transform:uppercase;
+    color:var(--aurora);display:flex;align-items:center;gap:10px;margin-bottom:22px;
+  }
+  .eyebrow::before{content:'';width:22px;height:1px;background:currentColor;opacity:.6;}
+  h1{
+    font-family:Georgia,"Times New Roman",serif;font-weight:500;
+    font-size:clamp(30px,6vw,46px);line-height:1.12;letter-spacing:-0.01em;margin-bottom:18px;
+  }
+  h1 em{font-style:italic;color:var(--sun);}
+  p{color:var(--frost);font-size:16px;line-height:1.75;margin-bottom:22px;}
+  p.en{font-size:14.5px;opacity:.82;margin-bottom:32px;}
+  p.en a{color:var(--aurora);}
+  a.home{
+    display:inline-flex;align-items:center;gap:10px;
+    min-height:44px;padding:12px 24px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--aurora);text-decoration:none;
+    background:rgba(95,227,179,.10);
+    border:1px solid rgba(95,227,179,.45);border-radius:100px;
+    transition:background .25s ease,border-color .25s ease;
+  }
+  a.home:hover,a.home:focus-visible{background:rgba(95,227,179,.2);border-color:rgba(95,227,179,.8);}
+  a:focus-visible{outline:2px solid var(--aurora);outline-offset:3px;}
+  .meta{
+    margin-top:44px;padding-top:22px;border-top:1px solid var(--line);
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:11.5px;color:var(--frost);opacity:.6;line-height:1.9;
+  }
+  .meta a{color:inherit;}
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">Virhe 404</div>
+  <h1>Tätä sivua ei <em>löytynyt</em>.</h1>
+  <p>Osoite saattaa olla vanhentunut tai kirjoitusvirhe. Tilan sivut, kuvat ja yhteystiedot löytyvät etusivulta.</p>
+  <p class="en" lang="en">This page could not be found. The farm&rsquo;s pages, photos and contact details are on the <a href="/nettisivut/en/">English home page</a>.</p>
+  <a class="home" href="/nettisivut/">Takaisin etusivulle</a>
+  <div class="meta">
+    Lapin Hunajamarja · Posio, Suomen Lappi<br>
+    <a href="mailto:info@lapinhunajamarja.fi">info@lapinhunajamarja.fi</a>
+  </div>
+</main>
+</body>
+</html>

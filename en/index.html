@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arctic Haskap — Posio, Finnish Lapland</title>
+<meta name="description" content="Arctic Haskap is one of the northernmost organic haskap farms in the world, located in Posio, Finnish Lapland. Long, freezing winters and the midnight sun create a unique growing environment for the berries.">
+<link rel="canonical" href="https://haskap-netizen.github.io/nettisivut/en/">
+<link rel="alternate" hreflang="fi" href="https://haskap-netizen.github.io/nettisivut/">
+<link rel="alternate" hreflang="en" href="https://haskap-netizen.github.io/nettisivut/en/">
+<link rel="alternate" hreflang="x-default" href="https://haskap-netizen.github.io/nettisivut/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230A1420'/%3E%3Ccircle cx='26' cy='30' r='11' fill='%235FE3B3'/%3E%3Ccircle cx='40' cy='38' r='11' fill='%232E9C82'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0A1420">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Arctic Haskap">
+<meta property="og:title" content="Arctic Haskap — Posio, Finnish Lapland">
+<meta property="og:description" content="Arctic Haskap is one of the northernmost organic haskap farms in the world, located in Posio, Finnish Lapland. Long, freezing winters and the midnight sun create a unique growing environment for the berries.">
+<meta property="og:url" content="https://haskap-netizen.github.io/nettisivut/en/">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="fi_FI">
+<meta property="og:image" content="https://haskap-netizen.github.io/nettisivut/assets/social/og-lapin-hunajamarja.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Haskap field and birch woodland in morning light in Posio">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Arctic Haskap — Posio, Finnish Lapland">
+<meta name="twitter:description" content="Arctic Haskap is one of the northernmost organic haskap farms in the world, located in Posio, Finnish Lapland.">
+<meta name="twitter:image" content="https://haskap-netizen.github.io/nettisivut/assets/social/og-lapin-hunajamarja.jpg">
+<meta name="twitter:image:alt" content="Haskap field and birch woodland in morning light in Posio">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+
+<!-- Hero-kuva on sivun LCP-elementti: kerrotaan selaimelle heti, ei odoteta skriptia.
+     sizes-arvo rajaa mobiilin pikselitiheyden jarkevaksi (kuva on tummennusgradientin alla). -->
+<link rel="preload" as="image" fetchpriority="high"
+      href="../assets/hero/hero-800.webp"
+      imagesrcset="../assets/hero/hero-800.webp 800w, ../assets/hero/hero-1100.webp 1100w, ../assets/hero/hero-1400.webp 1400w"
+      imagesizes="(max-width:700px) 65vw, 61vh">
+
+<script>document.documentElement.classList.add('js');</script>
+
+<noscript><style>
+  /* Karttapallo ja kaaviot piirretaan JavaScriptilla — ilman sita ne olisivat tyhjia laatikoita. */
+  #map-section,#tempChart,#daylightTimeline{display:none;}
+</style></noscript>
+<link rel="stylesheet" href="../assets/site.css">
+<script>
+/* Language-specific values for the shared script (../assets/site.js). */
+window.SITE = {
+  base: '../',
+  globe: {
+    name: 'Arctic Haskap',
+    eyebrow: 'Arctic Haskap from Posio, Finnish Lapland',
+    loadError: 'The globe could not be loaded'
+  },
+  charts: {
+    monthsShort: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    monthsLong:  ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    midnightSunLabel: '24 h (midnight sun)'
+  }
+};
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://haskap-netizen.github.io/nettisivut/en/#website",
+      "url": "https://haskap-netizen.github.io/nettisivut/en/",
+      "name": "Arctic Haskap",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://haskap-netizen.github.io/nettisivut/#org" }
+    },
+    {
+      "@type": ["Organization", "LocalBusiness"],
+      "@id": "https://haskap-netizen.github.io/nettisivut/#org",
+      "name": "Lapin Hunajamarja",
+      "alternateName": "Arctic Haskap",
+      "description": "An organic haskap farm in Posio, Finnish Lapland, and one of the northernmost in the world. First commercial harvest expected in 2027.",
+      "url": "https://haskap-netizen.github.io/nettisivut/",
+      "image": "https://haskap-netizen.github.io/nettisivut/assets/social/og-lapin-hunajamarja.jpg",
+      "email": "info@lapinhunajamarja.fi",
+      "telephone": "+358449701025",
+      "taxID": "1811598-1",
+      "identifier": {
+        "@type": "PropertyValue",
+        "propertyID": "Y-tunnus",
+        "value": "1811598-1"
+      },
+      "foundingDate": "2023",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Posio",
+        "addressRegion": "Lappi",
+        "addressCountry": "FI"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 66.343097,
+        "longitude": 28.195568
+      },
+      "knowsLanguage": ["fi", "en"],
+      "makesOffer": {
+        "@type": "Offer",
+        "availabilityStarts": "2027-07-01",
+        "itemOffered": {
+          "@type": "Product",
+          "name": "Organic Arctic haskap",
+          "alternateName": "Haskap",
+          "description": "Certified organic haskap (Lonicera caerulea), Boreal Beauty, Beast and Blizzard varieties. Grown at 66°N in Posio and traceable to the field."
+        }
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav id="story" aria-label="Main navigation">
+  <a class="brand" href="#top" aria-label="Arctic Haskap – back to the top">Arctic Haskap</a>
+  <div class="nav-links">
+    <a href="#science">Haskap</a>
+    <a href="#practices">Farming</a>
+    <a href="#seasons">Growing conditions</a>
+    <a href="#map-section">Location</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#trailcam">Trail camera</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-meta">
+    <div class="lang-switch" role="navigation" aria-label="Language selection">
+      <a href="../" lang="fi" hreflang="fi">FI</a><span aria-hidden="true">/</span><span aria-current="page">EN</span>
+    </div>
+    <span class="coords">66°N · POSIO, FINNISH LAPLAND</span>
+  </div>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+  <a href="#science">Haskap</a>
+  <a href="#practices">Farming</a>
+  <a href="#seasons">Growing conditions</a>
+  <a href="#map-section">Location</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#trailcam">Trail camera</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<main id="main">
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="hero-photo" id="heroPhoto" aria-hidden="true">
+    <img class="hero-photo-backdrop" alt="" width="1400" height="1867" decoding="async" fetchpriority="high"
+         src="../assets/hero/hero-800.webp" srcset="../assets/hero/hero-800.webp 800w, ../assets/hero/hero-1100.webp 1100w, ../assets/hero/hero-1400.webp 1400w" sizes="(max-width:700px) 65vw, 61vh">
+    <img class="hero-photo-main" alt="" width="1400" height="1867" decoding="async" fetchpriority="high"
+         src="../assets/hero/hero-800.webp" srcset="../assets/hero/hero-800.webp 800w, ../assets/hero/hero-1100.webp 1100w, ../assets/hero/hero-1400.webp 1400w" sizes="(max-width:700px) 65vw, 61vh">
+  </div>
+  <canvas id="stars"></canvas>
+  <svg class="aurora-svg" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="auroraG1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#8CFFB0" stop-opacity="0"/>
+        <stop offset="30%" stop-color="#5CFF8E" stop-opacity="1"/>
+        <stop offset="65%" stop-color="#22C97A" stop-opacity="0.7"/>
+        <stop offset="100%" stop-color="#22C97A" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="auroraG2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#D6FF8C" stop-opacity="0"/>
+        <stop offset="30%" stop-color="#7CFFA8" stop-opacity="0.95"/>
+        <stop offset="100%" stop-color="#2E9C6B" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="auroraG3" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#B285D6" stop-opacity="0"/>
+        <stop offset="45%" stop-color="#6FE39E" stop-opacity="0.55"/>
+        <stop offset="100%" stop-color="#6B4C7A" stop-opacity="0"/>
+      </linearGradient>
+      <filter id="auroraBlur" x="-60%" y="-60%" width="220%" height="220%">
+        <feGaussianBlur stdDeviation="11"/>
+      </filter>
+    </defs>
+    <g filter="url(#auroraBlur)">
+      <path class="ribbon r1" fill="url(#auroraG1)" d="M -100,300 C 80,160 260,360 460,220 S 760,100 960,230 1100,300 1300,240 L 1300,-50 L -100,-50 Z"/>
+      <path class="ribbon r2" fill="url(#auroraG2)" d="M -100,400 C 120,250 340,430 540,270 S 820,170 1000,290 1150,350 1300,300 L 1300,-50 L -100,-50 Z"/>
+      <path class="ribbon r3" fill="url(#auroraG3)" d="M -100,470 C 160,350 380,490 600,350 S 900,260 1100,370 1200,420 1300,380 L 1300,-50 L -100,-50 Z"/>
+    </g>
+  </svg>
+  <div class="hero-content">
+    <h1>Arctic<br><em>Haskap</em></h1>
+    <p class="hero-sub">Organic Arctic haskap from one of the northernmost berry farms in the world. Our family farm is located in Posio, Finnish Lapland, where long, freezing winters, protective snow cover and the midnight sun create a unique growing environment for haskap. We care for the soil and plants on nature’s terms — northern light, a clean growing environment and living soil do the rest.</p>
+    <div class="hero-meta">
+      <div><strong>2.5 ha</strong>under cultivation, 9,000 plants</div>
+      <div><strong>2027</strong>first commercial harvest</div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= SCIENCE ================= -->
+<section class="science" id="science">
+  <div class="wrap">
+    <div class="science-head reveal">
+      <h2>A DEEP-BLUE BERRY WITH AN EXCEPTIONAL COMPOSITION</h2>
+      <p>Haskap, also known as the honeyberry, is the edible fruit of the blue honeysuckle. It resembles an elongated blueberry, but its flavour is distinctive: in a ripe berry, sweetness and fresh acidity are balanced, with notes reminiscent of raspberry and blackcurrant.</p>
+    </div>
+
+    <div class="science-copy reveal">
+      <div class="eyebrow">ORIGIN &amp; VARIETIES</div>
+      <h3>From Asia, through Canada, to Posio.</h3>
+      <p>Blue honeysuckle (<em>Lonicera caerulea</em>) grows wild in northern forests across Asia, Europe and North America. Cultivars bred for fruit production are commonly known as haskap or honeyberry.</p>
+      <p>The name haskap comes from the Ainu people of northern Japan. The berry has been used in Hokkaidō for centuries, and in Japan it is known as the berry of eternal youth — a reference to Ainu tradition, where it is associated with longevity and good eyesight. Haskap is still relatively new in Europe: in December 2018, the EU authorised the placing on the market of <em>Lonicera caerulea</em> berries as a traditional food from a third country.</p>
+      <p>Haskap benefits greatly from cross-pollination. We grow three Boreal cultivars bred by the University of Saskatchewan in Canada. We chose them especially because they flower and ripen later than many other haskap cultivars. Their later growth rhythm is well suited to Posio, where spring arrives slowly and the growing season begins late.</p>
+      <ul class="science-varieties">
+        <li><strong>Boreal Beauty</strong> – large, firm and juicy berries</li>
+        <li><strong>Boreal Beast</strong> – medium-sized, firm and exceptionally aromatic berries</li>
+        <li><strong>Boreal Blizzard</strong> – very large, sweet berries with mild acidity</li>
+      </ul>
+      <p>The berry’s deep-blue colour comes from anthocyanins, the most prominent of which is cyanidin-3-glucoside. Haskap also contains other polyphenols, iridoids that are uncommon in edible fruits, vitamin C, and other vitamins and minerals. Studies have found that these compounds give haskap a high antioxidant capacity, making it an exceptionally valuable berry from a nutritional perspective.</p>
+
+      <div class="own-harvest">
+        <div class="eyebrow">OUR HARVEST WILL BE ANALYSED</div>
+        <p>In addition to the general research, we want to know exactly what our own berries contain. We will commission laboratory analyses of our first commercial harvest to determine, among other things, vitamin C, anthocyanin and polyphenol concentrations, as well as the berries’ antioxidant capacity. We will publish the results openly on this website once they are available.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRACTICES / TIMELINE ================= -->
+<section class="practices" id="practices">
+  <div class="wrap">
+    <div class="practices-head reveal">
+      <div class="eyebrow">FARMING PHILOSOPHY</div>
+      <h2>We do not till the soil. We let it do its work.</h2>
+      <p>Further south, and with more intensive methods, higher yields are possible. We have deliberately chosen a different starting point: our aim is not the largest possible harvest, but the highest possible berry quality while protecting the natural values of the site. We believe that a high-quality berry begins with living, healthy soil. Rather than trying to replace the soil’s own functions with heavy fertilisation, we maintain its natural nutrient cycle and allow the haskap to grow at its own pace. We monitor the wellbeing of the soil and plants and add nutrients only when a demonstrated need arises.</p>
+      <p>We grow haskap organically and according to regenerative no-till principles. When planting, we made only the small planting hole needed by each plant. Otherwise, we left the roots of the existing vegetation and the fungal networks undisturbed.</p>
+      <p>Permanent vegetation cover protects the soil throughout the year, maintains its structure and provides a habitat for soil organisms. We leave the cut vegetation in the field to return organic matter and nutrients to the soil. In this way, we support the soil’s natural fertility.</p>
+    </div>
+
+    <h3 class="timeline-title reveal">OUR JOURNEY TO BECOMING A HASKAP FARM</h3>
+    <div class="timeline">
+      <div class="timeline-line"></div>
+      <div class="t-item reveal">
+        <div class="t-year">1960s–2023</div>
+        <div class="t-body">
+          <h4>The field in nature’s care</h4>
+          <p>The field has never been used for intensive agriculture. Hay was last grown there on a small scale by a single family in the 1960s. After that, the field was left in nature’s care: meadow vegetation developed at its own pace, and passing reindeer grazed there from time to time.</p>
+          <p>Woodland plants also spread into the field from the surrounding forest and continue to enrich its diversity. Forest surrounds the field in every direction, providing benefits associated with agroforestry and supporting the field’s water balance. A lake lies 100–300 metres away to the south, west and north, increasing humidity, moderating temperature fluctuations and reducing the risk of night frosts.</p>
+          <p>Different willow species, junipers, birch scrub and other wild shrubs grow along the ditches, increasing biodiversity and providing shelter and food for pollinators and other insects.</p>
+        </div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-year">2023</div>
+        <div class="t-body">
+          <h4>Haskap cultivation begins and the farm enters organic certification</h4>
+          <p>The first haskap plants were planted in May 2023. A total of 5,000 plants were planted in the field during the spring. The soil was not tilled; only a small planting hole was made for each plant.</p>
+          <p>That summer, the field was mown for the first time in decades. In addition, declining downy birches were felled along the ditches. The cut branches and woody debris were left in the field to decompose, returning organic matter to the field’s natural nutrient cycle.</p>
+        </div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-year">2024</div>
+        <div class="t-body">
+          <h4>The orchard expands and the field’s vegetation cover is diversified</h4>
+          <p>A further 4,000 plants were planted in spring 2024, bringing the total to 9,000.</p>
+          <p>The vegetation cover that had developed in the field over decades was supplemented with a diverse green-manure seed mixture. This vegetation is not harvested as a crop; its role is to care for the soil around the haskap plants.</p>
+          <p>The mixture was sown directly into the meadow vegetation while it was still dormant after winter, without tilling the soil or removing the existing plants. In this way, the new vegetation supplements and diversifies the permanent cover that has developed in the field over decades.</p>
+          <p>The mixture contains timothy, fescue species, red clover, white clover, alsike clover and alfalfa. Through bacteria in their root nodules, the clovers and alfalfa fix atmospheric nitrogen into the field’s nutrient cycle. The grasses retain nutrients, while the plants’ different root systems support soil structure and soil life.</p>
+        </div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-year">2025</div>
+        <div class="t-body">
+          <h4>The plants grow stronger</h4>
+          <p>By 2025, most of the plants had survived their first growing years well and adapted to the northern conditions. For the first time, they received a small dose of fertiliser permitted in organic production, applied directly to their root zones.</p>
+          <p>Since the planting year, the crop has also been supported annually with foliar biostimulants. They do not replace fertilisation; their purpose is to support root development and the plants’ ability to withstand stress caused by changing weather conditions.</p>
+        </div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-year">2026</div>
+        <div class="t-body">
+          <h4>First product trials</h4>
+          <p>The orchard is already producing a small trial harvest, allowing us to conduct our first product trials in cooperation with Lapland University of Applied Sciences. These trials lay the groundwork for developing future haskap products before the first commercial harvest.</p>
+          <p>All haskap used in our future products will be certified organic produce from our own farm and traceable to the field.</p>
+        </div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-year">2027</div>
+        <div class="t-body">
+          <h4>First commercial harvest planned</h4>
+          <p>During flowering, hardworking bees from the local area arrive to help with pollination — thank you, Medenneitojen Hunaja!</p>
+          <p>In summer 2027, our aim is to gather the farm’s first commercial harvest. We will use a berry harvester rather than picking by hand. This allows the whole crop to be gathered at once at its optimal stage of ripeness.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SEASONS ================= -->
+<section class="seasons" id="seasons">
+  <div class="seasons-bg" id="seasonsBg"></div>
+  <div class="wrap">
+    <div class="seasons-head reveal">
+      <div class="eyebrow">THE EXTREMES OF THE NORTHERN YEAR</div>
+      <h2>The same berry under two completely different skies.</h2>
+    </div>
+
+    <div class="season-grid">
+      <div class="season-card reveal">
+        <svg class="season-icon aurora-icon" viewBox="0 0 56 38" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="auroraIconGradient" x1="2" y1="3" x2="54" y2="30" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#D2FFE7"/>
+              <stop offset=".34" stop-color="#70FFC0"/>
+              <stop offset=".7" stop-color="#32EC92"/>
+              <stop offset="1" stop-color="#0FAF70"/>
+            </linearGradient>
+            <linearGradient id="auroraIconGradientTwo" x1="5" y1="7" x2="50" y2="31" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#A3FFD4" stop-opacity=".26"/>
+              <stop offset=".5" stop-color="#45F2A1" stop-opacity=".92"/>
+              <stop offset="1" stop-color="#19C57D" stop-opacity=".3"/>
+            </linearGradient>
+            <filter id="auroraIconBlur" x="-30%" y="-50%" width="160%" height="200%">
+              <feGaussianBlur stdDeviation="2.3"/>
+            </filter>
+          </defs>
+          <path class="aurora-glow" d="M2 12C11 1 18 20 27 8S44 5 54 13" stroke="#42FFA4" stroke-width="8" stroke-linecap="round" opacity=".56" filter="url(#auroraIconBlur)"/>
+          <path class="aurora-sheet-one" d="M2 9C11 0 18 18 27 7S44 3 54 11L54 16C44 9 36 11 28 15S12 8 2 17Z" fill="url(#auroraIconGradient)" opacity=".9"/>
+          <path class="aurora-sheet-two" d="M5 18C14 9 21 26 30 15S45 12 52 18L51 23C43 18 37 19 31 23S17 15 6 26Z" fill="url(#auroraIconGradientTwo)" opacity=".76"/>
+          <circle cx="8" cy="5" r=".8" fill="#F6F8F7" opacity=".7"/>
+          <circle cx="45" cy="4" r=".6" fill="#F6F8F7" opacity=".55"/>
+          <circle cx="36" cy="9" r=".5" fill="#F6F8F7" opacity=".5"/>
+          <path d="M8 32H48" stroke="#D7E2DF" stroke-opacity=".38" stroke-width="1.1" stroke-linecap="round"/>
+        </svg>
+        <h3>Northern winter</h3>
+        <span class="season-date">Long season of frost and snow · October–April</span>
+        <p>In October, the days shorten quickly and winter arrives. The cold keeps the haskap dormant, while deep snow insulates the soil and protects the roots from the hardest frosts. As the northern lights glow overhead, nature rests beneath the snow and prepares for a new growing season.</p>
+      </div>
+      <div class="season-card reveal">
+        <svg class="season-icon sunset-icon" viewBox="0 0 56 40" fill="none" aria-hidden="true">
+          <defs>
+            <radialGradient id="sunsetDiscGradient" cx="0" cy="0" r="1" gradientTransform="translate(25 19) rotate(45) scale(15)" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#FFF5C7"/>
+              <stop offset=".44" stop-color="#FFD978"/>
+              <stop offset="1" stop-color="#E9824D"/>
+            </radialGradient>
+            <linearGradient id="sunsetIconGradient" x1="8" y1="7" x2="47" y2="35" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#FFE19A"/>
+              <stop offset=".52" stop-color="#EFB94C"/>
+              <stop offset="1" stop-color="#E6814A"/>
+            </linearGradient>
+            <filter id="sunsetIconBlur" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="3"/>
+            </filter>
+          </defs>
+          <circle class="sun-glow" cx="28" cy="23" r="12" fill="#EFB94C" opacity=".45" filter="url(#sunsetIconBlur)"/>
+          <circle class="sun-disc" cx="28" cy="23" r="8" fill="url(#sunsetDiscGradient)"/>
+          <g class="sun-rays" stroke="url(#sunsetIconGradient)" stroke-width="1.7" stroke-linecap="round">
+            <path d="M28 4V9M13 10l4 4M43 10l-4 4M7 21h6M43 21h6"/>
+          </g>
+          <path d="M4 26H52" stroke="#FFE4A4" stroke-width="1.35" stroke-linecap="round"/>
+          <g class="sun-reflection" stroke="url(#sunsetIconGradient)" stroke-linecap="round">
+            <path d="M17 30H39" stroke-width="1.7"/>
+            <path d="M21 34H35" stroke-width="1.35"/>
+            <path d="M25 37H31" stroke-width="1.05"/>
+          </g>
+        </svg>
+        <h3>White summer night</h3>
+        <span class="season-date">Midnight sun · June–July</span>
+        <p>Around midsummer, the sun does not set in Posio for weeks. Light around the clock gives haskap ample time for photosynthesis and supports the growth and ripening of the berries. During the short northern summer, nature is filled with the force of growth.</p>
+      </div>
+    </div>
+
+    <!-- ===== NEW: HORIZONTAL DAYLIGHT TIMELINE ===== -->
+    <div class="daylight-timeline reveal">
+      <div class="eyebrow">THE ANNUAL CYCLE OF LIGHT</div>
+      <h2>Monthly daylight hours</h2>
+      <noscript><p class="chart-note">JavaScript is required to draw the chart. Daylight varies from about 2.8 hours in December to 23.7 hours in June.</p></noscript>
+      <p class="sub">In the north, the length of the day moves between extremes over the year: in midwinter there are only a few hours of daylight, while in midsummer the sun remains above the horizon throughout the night. A long winter dormancy and the midnight sun create a northern rhythm for haskap, concentrating growth and berry ripening into a short but luminous summer.</p>
+      <svg id="daylightTimeline" viewBox="0 0 1100 280" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#EFB94C"/>
+            <stop offset="100%" stop-color="#C98F2E"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="tl-legend">
+        <span><span class="dot sun"></span> Daylight hours</span>
+        <span><span class="dot sun-high"></span> Midnight sun (over 20 h)</span>
+      </div>
+      <p class="daylight-source">Source: Calculated for the farm’s coordinates (66°20′35″ N) using an established sunrise and sunset algorithm that accounts for atmospheric refraction. See also the University of Helsinki Almanac Office (almanakka.helsinki.fi).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXTREMES (temperature chart) ================= -->
+<section class="extremes" id="extremes">
+  <div class="wrap">
+    <div class="extremes-head reveal">
+      <div class="eyebrow">NORTHERN TEMPERATURE EXTREMES</div>
+      <h2>Highest and lowest temperatures measured each month (°C)</h2>
+      <noscript><p class="chart-note">JavaScript is required to draw the chart. The measured extremes range from −34.8°C in January to +28.2°C in June.</p></noscript>
+      <p>These records were set at different times over a long observation history, not within a single year. The vast variation between July heat and January frost reflects the powerful northern cycle of the seasons — conditions to which haskap is naturally adapted.</p>
+    </div>
+    <div class="extremes-chart reveal">
+      <svg id="tempChart" viewBox="0 0 1160 470" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="maxGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#F4CE7A"/>
+            <stop offset="100%" stop-color="#C98F2E"/>
+          </linearGradient>
+          <linearGradient id="minGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2E9C82"/>
+            <stop offset="100%" stop-color="#5FE3B3"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <p class="chart-note">Nearest weather station: Kuusamo Rukatunturi (FMISID 101897), approximately 47 km from the farm · Data: 5 Nov 1993–23 Jul 2026 · Source: Finnish Meteorological Institute open data</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SIJAINTI / MAP ================= -->
+<div id="map-section">
+
+<div id="real-map" role="button" tabindex="0" aria-label="Start the animated globe">
+  <img id="real-map-img" alt="Globe showing the farm’s location in Posio" width="1400" height="700" decoding="async">
+  <div id="real-map-label">Arctic Haskap · 66°20′35″ N, 28°11′40″ E</div>
+</div>
+
+<div id="loader"></div>
+<canvas id="globe-canvas"></canvas>
+<div id="sat-reveal"><canvas id="sat-canvas"></canvas></div>
+<div id="sat-pin">
+  <div class="ring"></div>
+  <div class="ring"></div>
+  <div class="ring"></div>
+</div>
+<div id="berry-pin"></div>
+<div class="vignette"></div>
+
+<div class="narrative">
+  <div class="phase-text" id="text-1" lang="en">Our farm is located in Northern Europe&hellip;</div>
+  <div class="phase-text" id="text-2" lang="en">in Finnish Lapland.</div>
+</div>
+
+<div id="destination-card">
+  <div class="eyebrow" lang="en">Arctic Haskap from Posio, Finnish Lapland</div>
+  <h2 id="dest-name">Arctic Haskap</h2>
+  <div class="coords" id="dest-coords">66°20′35″ N, 28°11′40″ E</div>
+  <button id="globe-play" type="button" aria-label="Show the animated globe">
+    <span class="gp-icon" aria-hidden="true"></span><span class="gp-label">View the globe</span>
+  </button>
+</div>
+
+<button id="replay">Replay ↻</button>
+
+<div class="map-attribution">
+  <a href="https://www.esri.com/" target="_blank" rel="noopener noreferrer">Powered by Esri</a>
+  · Imagery: Esri, Vantor, Earthstar Geographics and the GIS User Community
+</div>
+
+</div>
+<!-- ================= /SIJAINTI / MAP ================= -->
+
+<!-- ================= GALLERY (from galleria.html) ================= -->
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="gallery-head reveal">
+      <div class="eyebrow">GALLERY</div>
+      <h2>Photos and videos from the farm</h2>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="g-tile has-img reveal">
+        <img loading="lazy" src="../assets/gallery/gallery-01.webp" srcset="../assets/gallery/gallery-01-mobile.webp 900w, ../assets/gallery/gallery-01.webp 2000w" sizes="(max-width: 520px) 100vw, (max-width: 820px) 50vw, (min-width: 1180px) 370px, 33vw" alt="The first haskap plants being planted in the field in Posio on 25 May 2023" width="1425" height="1900">
+        <div class="g-caption">25 May 2023 — the first plants go into the ground. By evening, the temperature had fallen and sleet returned — welcome to Lapland!</div>
+      </div>
+      <div class="g-tile has-img reveal">
+        <img loading="lazy" src="../assets/gallery/gallery-02.webp" srcset="../assets/gallery/gallery-02-mobile.webp 900w, ../assets/gallery/gallery-02.webp 2000w" sizes="(max-width: 520px) 100vw, (max-width: 820px) 50vw, (min-width: 1180px) 370px, 33vw" alt="A haskap plant growing well in June 2023" width="855" height="1900">
+        <div class="g-caption">21 June 2023 — the plants are growing well.</div>
+      </div>
+      <div class="g-tile has-img reveal">
+        <img loading="lazy" src="../assets/gallery/gallery-03.webp" srcset="../assets/gallery/gallery-03-mobile.webp 900w, ../assets/gallery/gallery-03.webp 2000w" sizes="(max-width: 520px) 100vw, (max-width: 820px) 50vw, (min-width: 1180px) 370px, 33vw" alt="Building a reindeer fence around the haskap field in Posio in July 2023" width="855" height="1900">
+        <div class="g-caption">27 July 2023 — building the reindeer fence. Before it was completed, reindeer managed to pull up a few plants by the roots.</div>
+      </div>
+      
+      <div class="g-tile has-img reveal">
+        <img loading="lazy" src="../assets/gallery/gallery-04.webp" srcset="../assets/gallery/gallery-04-mobile.webp 900w, ../assets/gallery/gallery-04.webp 2000w" sizes="(max-width: 520px) 100vw, (max-width: 820px) 50vw, (min-width: 1180px) 370px, 33vw" alt="The neighbouring lake in morning mist in September 2023" width="1425" height="1900">
+        <div class="g-caption">15 September 2023 — the neighbouring lake in morning mist.</div>
+      </div>
+      <div class="g-tile has-img reveal">
+        <img loading="lazy" src="../assets/gallery/gallery-05.webp" srcset="../assets/gallery/gallery-05-mobile.webp 900w, ../assets/gallery/gallery-05.webp 2000w" sizes="(max-width: 520px) 100vw, (max-width: 820px) 50vw, (min-width: 1180px) 370px, 33vw" alt="Autumn colours by the lake in September 2023" width="1440" height="1440">
+        <div class="g-caption">26 September 2023 — autumn colours by the lake.</div>
+      </div>
+      <div class="g-tile has-img reveal">
+        <img loading="lazy" src="../assets/gallery/gallery-06.webp" srcset="../assets/gallery/gallery-06-mobile.webp 900w, ../assets/gallery/gallery-06.webp 2000w" sizes="(max-width: 520px) 100vw, (max-width: 820px) 50vw, (min-width: 1180px) 370px, 33vw" alt="Autumn colours and a row of haskap plants in Posio in September 2023" width="1425" height="1900">
+        <div class="g-caption">28 September 2023 — the leaves begin to change colour.</div>
+      </div>
+      <div class="g-tile has-img reveal">
+        <img loading="lazy" src="../assets/gallery/gallery-07.webp" srcset="../assets/gallery/gallery-07-mobile.webp 900w, ../assets/gallery/gallery-07.webp 2000w" sizes="(max-width: 520px) 100vw, (max-width: 820px) 50vw, (min-width: 1180px) 370px, 33vw" alt="The low October sun glistening on the lake in 2023" width="2000" height="1500">
+        <div class="g-caption">10 October 2023 — the low October sun glistens across the open water.</div>
+      </div>
+
+      <div class="g-tile has-img reveal">
+        <img loading="lazy" src="../assets/gallery/gallery-08.webp" srcset="../assets/gallery/gallery-08-mobile.webp 900w, ../assets/gallery/gallery-08.webp 2000w" sizes="(max-width: 520px) 100vw, (max-width: 820px) 50vw, (min-width: 1180px) 370px, 33vw" alt="Bracket fungi on a stump amid the first snow in October 2023" width="1425" height="1900">
+        <div class="g-caption">10 October 2023 — bracket fungi on a stump amid the first snow.</div>
+      </div>
+      
+            <div class="g-tile has-img reveal">
+        <img src="../assets/gallery/gallery-09.webp" srcset="../assets/gallery/gallery-09-mobile.webp 900w, ../assets/gallery/gallery-09.webp 2000w" sizes="(max-width: 520px) 100vw, (max-width: 820px) 50vw, (min-width: 1180px) 370px, 33vw" loading="lazy" alt="The first berries beginning to form" width="1425" height="1900">
+        <div class="g-caption">8 July 2024 — the first berries are beginning to form, initially green and later ripening to blue.</div>
+      </div>
+<div class="g-tile wide has-img reveal">
+        <img loading="lazy" src="../assets/gallery/gallery-10.webp" srcset="../assets/gallery/gallery-10-mobile.webp 900w, ../assets/gallery/gallery-10.webp 2000w" sizes="(max-width: 520px) 100vw, (max-width: 820px) 50vw, (min-width: 1180px) 370px, 33vw" alt="A frosty October morning in the haskap field in Posio in 2024" width="1900" height="1425">
+        <div class="g-caption">3 October 2024 — a frosty morning among the rows planted in spring 2024.</div>
+      </div>
+      <div class="g-tile has-img reveal">
+        <img loading="lazy" src="../assets/gallery/gallery-11.webp" srcset="../assets/gallery/gallery-11-mobile.webp 900w, ../assets/gallery/gallery-11.webp 2000w" sizes="(max-width: 520px) 100vw, (max-width: 820px) 50vw, (min-width: 1180px) 370px, 33vw" alt="Sunrise over the frosty field in October 2024" width="1600" height="1200">
+        <div class="g-caption">6 October 2024 — sunrise over the frosty field.</div>
+      </div>
+      <div class="g-tile has-img reveal">
+        <img loading="lazy" src="../assets/gallery/gallery-12.webp" srcset="../assets/gallery/gallery-12-mobile.webp 900w, ../assets/gallery/gallery-12.webp 2000w" sizes="(max-width: 520px) 100vw, (max-width: 820px) 50vw, (min-width: 1180px) 370px, 33vw" alt="A reindeer in the first snow at the edge of the field in October 2024" width="1425" height="1900">
+        <div class="g-caption">7 October 2024 — a reindeer at the edge of the field in the first snow.</div>
+      </div>
+            <div class="g-tile has-img reveal">
+        <img src="../assets/gallery/gallery-13.webp" srcset="../assets/gallery/gallery-13-mobile.webp 900w, ../assets/gallery/gallery-13.webp 2000w" sizes="(max-width: 520px) 100vw, (max-width: 820px) 50vw, (min-width: 1180px) 370px, 33vw" loading="lazy" alt="Flowering is beginning" width="1900" height="855">
+        <div class="g-caption">11 June 2025 — flowering is beginning.</div>
+      </div>
+
+      <div class="g-tile has-img featured reveal">
+        <img loading="lazy" src="../assets/gallery/gallery-14.webp" srcset="../assets/gallery/gallery-14-mobile.webp 900w, ../assets/gallery/gallery-14.webp 2000w" sizes="(max-width: 520px) 100vw, (max-width: 820px) 50vw, (min-width: 1180px) 370px, 33vw" alt="The first haskap berries on a bush in August 2025" width="1425" height="1900">
+        <div class="g-caption">6 August 2025 — more berries appeared on the bushes than in the previous year. The first commercial harvest is expected in 2027.</div>
+      </div>
+      <div class="g-tile has-img reveal">
+        <img loading="lazy" src="../assets/gallery/gallery-15.webp" srcset="../assets/gallery/gallery-15-mobile.webp 900w, ../assets/gallery/gallery-15.webp 2000w" sizes="(max-width: 520px) 100vw, (max-width: 820px) 50vw, (min-width: 1180px) 370px, 33vw" alt="The lush haskap field in summer 2025" width="1900" height="1425">
+        <div class="g-caption">11 August 2025 — the field is lush in midsummer.</div>
+      </div>
+      <div class="g-tile has-img reveal">
+        <img loading="lazy" src="../assets/gallery/gallery-16.webp" srcset="../assets/gallery/gallery-16-mobile.webp 900w, ../assets/gallery/gallery-16.webp 2000w" sizes="(max-width: 520px) 100vw, (max-width: 820px) 50vw, (min-width: 1180px) 370px, 33vw" alt="Birch woodland and the field in evening light in May 2026" width="1900" height="1425">
+        <div class="g-caption">26 May 2026 — the field and birch woodland in evening light.</div>
+      </div>
+      <div class="g-tile has-img reveal">
+        <img loading="lazy" src="../assets/gallery/gallery-17.webp" srcset="../assets/gallery/gallery-17-mobile.webp 900w, ../assets/gallery/gallery-17.webp 2000w" sizes="(max-width: 520px) 100vw, (max-width: 820px) 50vw, (min-width: 1180px) 370px, 33vw" alt="The farm’s first tractor and inter-row flail mower at the edge of the forest" width="2000" height="1500">
+        <div class="g-caption">12 July 2026 — the farm acquired its first small tractor and an inter-row flail mower to make the annual mowing of the extensive vegetation easier. During the first years, all planting and maintenance work was done by hand and the field was crossed on foot.</div>
+      </div>
+      <div class="g-tile has-img reveal" id="hero-gallery-image">
+        <img loading="lazy" src="../assets/gallery/gallery-18.webp" srcset="../assets/gallery/gallery-18-mobile.webp 900w, ../assets/gallery/gallery-18.webp 2000w" sizes="(max-width: 520px) 100vw, (max-width: 820px) 50vw, (min-width: 1180px) 370px, 33vw" alt="Rows of haskap bushes extending towards the forest edge in July 2026" width="1500" height="2000">
+        <div class="g-caption">19 July 2026 — rows of haskap bushes extend towards the forest edge.</div>
+      </div>
+    </div>
+    <figure class="gallery-video reveal">
+      <video controls preload="none" playsinline width="1920" height="1080" data-poster="../assets/video/pensasrivistoa-20-7-2026-poster.webp">
+        <source src="../assets/video/pensasrivistoa-20-7-2026.mp4" type="video/mp4">
+        Your browser does not support video playback.
+      </video>
+      <figcaption>Rows of haskap bushes on 20 July 2026 · one week after mowing</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ================= TRAILCAM (from riistakamera.html) ================= -->
+<section class="trailcam" id="trailcam">
+  <div class="wrap">
+    <div class="trailcam-head reveal">
+      <div class="eyebrow">TRAIL CAMERA · SINCE OCTOBER 2023</div>
+      <h2>The same view in every season.</h2>
+      <p>A fixed trail camera has photographed the same part of the field since October 2023 — from the short days of winter to the midnight sun, and from foxes and mountain hares to reindeer.</p>
+    </div>
+    <div class="trailcam-grid">
+      <div class="tc-tile reveal"><img src="../assets/trailcam/trailcam-01.webp" srcset="../assets/trailcam/trailcam-01-mobile.webp 700w, ../assets/trailcam/trailcam-01.webp 960w" sizes="(max-width: 460px) 50vw, (max-width: 700px) 33vw, (max-width: 980px) 25vw, (min-width: 1180px) 220px, 20vw" alt="30 Oct 2023 at 13:15, −11°C — a red fox trotting across the snowy field" loading="lazy" width="960" height="540"></div>
+      <div class="tc-tile reveal"><img src="../assets/trailcam/trailcam-02.webp" srcset="../assets/trailcam/trailcam-02-mobile.webp 700w, ../assets/trailcam/trailcam-02.webp 960w" sizes="(max-width: 460px) 50vw, (max-width: 700px) 33vw, (max-width: 980px) 25vw, (min-width: 1180px) 220px, 20vw" alt="18 Dec 2023 at 10:36, −13°C — the winter field at sunrise" loading="lazy" width="960" height="540"></div>
+      <div class="tc-tile reveal"><img src="../assets/trailcam/trailcam-03.webp" srcset="../assets/trailcam/trailcam-03-mobile.webp 700w, ../assets/trailcam/trailcam-03.webp 960w" sizes="(max-width: 460px) 50vw, (max-width: 700px) 33vw, (max-width: 980px) 25vw, (min-width: 1180px) 220px, 20vw" alt="4 Feb 2024 at 09:19, −16°C — frost-covered branches above the snowy field" loading="lazy" width="960" height="540"></div>
+      <div class="tc-tile reveal"><img src="../assets/trailcam/trailcam-04.webp" srcset="../assets/trailcam/trailcam-04-mobile.webp 700w, ../assets/trailcam/trailcam-04.webp 960w" sizes="(max-width: 460px) 50vw, (max-width: 700px) 33vw, (max-width: 980px) 25vw, (min-width: 1180px) 220px, 20vw" alt="3 Apr 2024 at 15:47, −4°C — the open snow-covered field in spring" loading="lazy" width="960" height="540"></div>
+      <div class="tc-tile reveal"><img src="../assets/trailcam/trailcam-05.webp" srcset="../assets/trailcam/trailcam-05-mobile.webp 700w, ../assets/trailcam/trailcam-05.webp 960w" sizes="(max-width: 460px) 50vw, (max-width: 700px) 33vw, (max-width: 980px) 25vw, (min-width: 1180px) 220px, 20vw" alt="3 May 2024 at 00:54, −3°C — a mountain hare at night" loading="lazy" width="960" height="540"></div>
+      <div class="tc-tile reveal"><img src="../assets/trailcam/trailcam-06.webp" srcset="../assets/trailcam/trailcam-06-mobile.webp 700w, ../assets/trailcam/trailcam-06.webp 960w" sizes="(max-width: 460px) 50vw, (max-width: 700px) 33vw, (max-width: 980px) 25vw, (min-width: 1180px) 220px, 20vw" alt="15 May 2024 at 14:02, 16°C — melting snow reveals the ground" loading="lazy" width="960" height="540"></div>
+      <div class="tc-tile reveal"><img src="../assets/trailcam/trailcam-07.webp" srcset="../assets/trailcam/trailcam-07-mobile.webp 700w, ../assets/trailcam/trailcam-07.webp 960w" sizes="(max-width: 460px) 50vw, (max-width: 700px) 33vw, (max-width: 980px) 25vw, (min-width: 1180px) 220px, 20vw" alt="22 Jun 2024 at 15:13, 11°C — lush grass in June" loading="lazy" width="960" height="540"></div>
+      <div class="tc-tile reveal"><img src="../assets/trailcam/trailcam-08.webp" srcset="../assets/trailcam/trailcam-08-mobile.webp 700w, ../assets/trailcam/trailcam-08.webp 960w" sizes="(max-width: 460px) 50vw, (max-width: 700px) 33vw, (max-width: 980px) 25vw, (min-width: 1180px) 220px, 20vw" alt="25 Jul 2024 at 05:47, 9°C — reindeer in morning mist in the field" loading="lazy" width="960" height="540"></div>
+      <div class="tc-tile reveal"><img src="../assets/trailcam/trailcam-09.webp" srcset="../assets/trailcam/trailcam-09-mobile.webp 700w, ../assets/trailcam/trailcam-09.webp 960w" sizes="(max-width: 460px) 50vw, (max-width: 700px) 33vw, (max-width: 980px) 25vw, (min-width: 1180px) 220px, 20vw" alt="9 Aug 2024 at 06:59, 10°C — the green field in August" loading="lazy" width="960" height="540"></div>
+      <div class="tc-tile reveal"><img src="../assets/trailcam/trailcam-10.webp" srcset="../assets/trailcam/trailcam-10-mobile.webp 700w, ../assets/trailcam/trailcam-10.webp 960w" sizes="(max-width: 460px) 50vw, (max-width: 700px) 33vw, (max-width: 980px) 25vw, (min-width: 1180px) 220px, 20vw" alt="26 Sep 2024 at 09:49, 7°C — the field in autumn" loading="lazy" width="960" height="540"></div>
+      <div class="tc-tile reveal"><img src="../assets/trailcam/trailcam-11.webp" srcset="../assets/trailcam/trailcam-11-mobile.webp 700w, ../assets/trailcam/trailcam-11.webp 960w" sizes="(max-width: 460px) 50vw, (max-width: 700px) 33vw, (max-width: 980px) 25vw, (min-width: 1180px) 220px, 20vw" alt="31 Oct 2024 at 09:56, −8°C — the first snow in the field" loading="lazy" width="960" height="540"></div>
+      <div class="tc-tile reveal"><img src="../assets/trailcam/trailcam-12.webp" srcset="../assets/trailcam/trailcam-12-mobile.webp 700w, ../assets/trailcam/trailcam-12.webp 960w" sizes="(max-width: 460px) 50vw, (max-width: 700px) 33vw, (max-width: 980px) 25vw, (min-width: 1180px) 220px, 20vw" alt="3 Jan 2025 at 02:21, −26°C — a hazy frosty night" loading="lazy" width="960" height="540"></div>
+      <div class="tc-tile reveal"><img src="../assets/trailcam/trailcam-13.webp" srcset="../assets/trailcam/trailcam-13-mobile.webp 700w, ../assets/trailcam/trailcam-13.webp 960w" sizes="(max-width: 460px) 50vw, (max-width: 700px) 33vw, (max-width: 980px) 25vw, (min-width: 1180px) 220px, 20vw" alt="21 Jan 2025 at 00:19, −30°C — a dark winter night" loading="lazy" width="960" height="540"></div>
+      <div class="tc-tile reveal"><img src="../assets/trailcam/trailcam-14.webp" srcset="../assets/trailcam/trailcam-14-mobile.webp 700w, ../assets/trailcam/trailcam-14.webp 960w" sizes="(max-width: 460px) 50vw, (max-width: 700px) 33vw, (max-width: 980px) 25vw, (min-width: 1180px) 220px, 20vw" alt="16 Mar 2025 at 15:56, −5°C — a sunny snow-covered field" loading="lazy" width="960" height="540"></div>
+      <div class="tc-tile reveal"><img src="../assets/trailcam/trailcam-15.webp" srcset="../assets/trailcam/trailcam-15-mobile.webp 700w, ../assets/trailcam/trailcam-15.webp 960w" sizes="(max-width: 460px) 50vw, (max-width: 700px) 33vw, (max-width: 980px) 25vw, (min-width: 1180px) 220px, 20vw" alt="10 May 2025 at 13:38, 9°C — melting snow in May" loading="lazy" width="960" height="540"></div>
+      <div class="tc-tile reveal"><img src="../assets/trailcam/trailcam-16.webp" srcset="../assets/trailcam/trailcam-16-mobile.webp 700w, ../assets/trailcam/trailcam-16.webp 960w" sizes="(max-width: 460px) 50vw, (max-width: 700px) 33vw, (max-width: 980px) 25vw, (min-width: 1180px) 220px, 20vw" alt="2 Aug 2025 at 20:23, 21°C — the lushness of a summer evening" loading="lazy" width="960" height="540"></div>
+      <div class="tc-tile reveal"><img src="../assets/trailcam/trailcam-17.webp" srcset="../assets/trailcam/trailcam-17-mobile.webp 700w, ../assets/trailcam/trailcam-17.webp 960w" sizes="(max-width: 460px) 50vw, (max-width: 700px) 33vw, (max-width: 980px) 25vw, (min-width: 1180px) 220px, 20vw" alt="13 Feb 2026 at 12:43, −22°C — a snowstorm in the field" loading="lazy" width="960" height="540"></div>
+      <div class="tc-tile reveal"><img src="../assets/trailcam/trailcam-18.webp" srcset="../assets/trailcam/trailcam-18-mobile.webp 700w, ../assets/trailcam/trailcam-18.webp 960w" sizes="(max-width: 460px) 50vw, (max-width: 700px) 33vw, (max-width: 980px) 25vw, (min-width: 1180px) 220px, 20vw" alt="27 Apr 2026 at 11:34, −1°C — the spring thaw" loading="lazy" width="960" height="540"></div>
+      <div class="tc-tile reveal"><img src="../assets/trailcam/trailcam-19.webp" srcset="../assets/trailcam/trailcam-19-mobile.webp 700w, ../assets/trailcam/trailcam-19.webp 960w" sizes="(max-width: 460px) 50vw, (max-width: 700px) 33vw, (max-width: 980px) 25vw, (min-width: 1180px) 220px, 20vw" alt="23 May 2026 at 10:43, 16°C — late-spring greenery" loading="lazy" width="960" height="540"></div>
+      <div class="tc-tile reveal"><img src="../assets/trailcam/trailcam-20.webp" srcset="../assets/trailcam/trailcam-20-mobile.webp 700w, ../assets/trailcam/trailcam-20.webp 960w" sizes="(max-width: 460px) 50vw, (max-width: 700px) 33vw, (max-width: 980px) 25vw, (min-width: 1180px) 220px, 20vw" alt="11 Jun 2026 at 11:27, 16°C — lush vegetation in June" loading="lazy" width="960" height="540"></div>
+    </div>
+    <p class="trailcam-note">The date, time and temperature are recorded directly on each image by the camera.</p>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">CONTACT</div>
+      <h2>Interested in our future harvest?</h2>
+      <p>Get in touch if you are looking for organic Arctic haskap for products, further processing or collaboration.</p>
+    </div>
+    <div class="contact-box reveal">
+      <div class="contact-row"><span>Farm</span><span>Lapin Hunajamarja · Posio</span></div>
+      <div class="contact-row"><span>Email</span><span><a href="mailto:info@lapinhunajamarja.fi">info@lapinhunajamarja.fi</a></span></div>
+      <div class="contact-row"><span>Phone</span><span>+358 44 9701 025</span></div>
+      <div class="contact-row"><span>Business ID</span><span>1811598-1</span></div>
+      <div class="contact-row"><span>Harvest</span><span>first commercial harvest in 2027</span></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+  <div class="wrap">
+    <div class="footer-bottom">
+      <span>© 2026 Lapin Hunajamarja</span>
+      <span>Certified organic · Traceable to the field</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= MAP INTRO SCRIPT (from index.html) ================= -->
+
+
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

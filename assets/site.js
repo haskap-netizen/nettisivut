@@ -20,7 +20,9 @@ function loadThree(){
       const s = document.createElement('script');
       s.src = SITE.base + 'assets/three.min.js';
       s.onload = resolve;
-      s.onerror = () => reject(new Error('three.js ei latautunut'));
+      // Nollataan valimuisti, jotta epaonnistuneen latauksen jalkeen uusi yritys
+      // hakee skriptin oikeasti uudelleen eika palauta samaa hylattya lupausta.
+      s.onerror = () => { threeLoader = null; reject(new Error('three.js ei latautunut')); };
       document.head.appendChild(s);
     });
   }
@@ -31,7 +33,22 @@ function loadThree(){
 // Tarkistetaan funktiona, jotta ikkunan koon muutos / laitteen kaanto huomataan.
 const lightMQ  = window.matchMedia('(max-width: 700px)');
 const motionMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
-const wantsLightweight = () => lightMQ.matches || motionMQ.matches;
+// WebGL-tuki tarkistetaan kevyesti ETUKATEEN: jos konteksti ei aukea (3D estetty,
+// ohjain mustalla listalla, laitteistokiihdytys pois paalta), palloa ei voi piirtaa
+// eika 600 kt:n three.min.js:aa kannata edes hakea. Tulos muistiin — kontekstin
+// luonti on hidas operaatio eika tulos muutu sivun elinkaaren aikana.
+let webglSupported = null;
+function hasWebGL(){
+  if (webglSupported !== null) return webglSupported;
+  try {
+    const c = document.createElement('canvas');
+    webglSupported = !!(window.WebGLRenderingContext &&
+      (c.getContext('webgl') || c.getContext('experimental-webgl')));
+  } catch (err) { webglSupported = false; }
+  return webglSupported;
+}
+
+const wantsLightweight = () => lightMQ.matches || motionMQ.matches || !hasWebGL();
 
 function showLightweightMap(){
   mapSectionElement?.classList.add('mobile-map-fallback');
@@ -927,13 +944,27 @@ function startGlobe(){
     mapSectionElement?.classList.add('globe-active');
     initGlobe();
   }).catch(() => {
+    // Epaonnistumisessa palataan kevytversioon. wireLightweight() hakee posterin —
+    // tyopoydalla sita ei ole ladattu, joten ilman tata kehys jaa tyhjaksi.
+    globeStarted = false;
+    mapSectionElement?.classList.remove('globe-active');
+    wireLightweight();
     showLightweightMap();
     if (globePlay) {
       globePlay.disabled = false;
       globePlay.classList.remove('loading');
-      globePlay.textContent = SITE.globe.loadError;
+      setPlayLabel(SITE.globe.loadError);
     }
   });
+}
+
+// Vaihdetaan vain tekstisisalto, ei koko napin sisusta: textContent tuhoaisi
+// .gp-icon- ja .gp-label-elementit ja nappi menettaisi ikoninsa.
+function setPlayLabel(text){
+  if (!globePlay) return;
+  const label = globePlay.querySelector('.gp-label');
+  if (label) label.textContent = text;
+  else globePlay.textContent = text;
 }
 
 // Kevytversion kuva ladataan vain kevytversiossa, jottei tyopoyta lataa sita turhaan.
@@ -949,8 +980,17 @@ function wireLightweight(){
   if (lightweightWired) return;
   lightweightWired = true;
   loadMapPoster();
-  globePlay?.addEventListener('click', startGlobe);
   const poster = document.getElementById('real-map');
+  if (!hasWebGL()) {
+    // Ilman WebGL:aa palloa ei voi kaynnistaa lainkaan, joten nappia ja
+    // klikattavuutta ei nayteta ollenkaan — kuva jaa staattiseksi kartaksi.
+    if (globePlay) globePlay.style.display = 'none';
+    poster?.removeAttribute('role');
+    poster?.removeAttribute('tabindex');
+    poster?.removeAttribute('aria-label');
+    return;
+  }
+  globePlay?.addEventListener('click', startGlobe);
   poster?.addEventListener('click', startGlobe);
   poster?.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); startGlobe(); }
@@ -1042,6 +1082,15 @@ scheduleMapMode();
     const slot = usableW / tempData.length;
     const barW = slot * 0.44;
 
+    // Yksikko merkitaan kerran y-akselin ylapaahan, ei jokaiseen asteikkolukemaan:
+    // otsikossa (°C) oli otsikkokoossa turhan hallitseva.
+    const unit = document.createElementNS(svgNS,'text');
+    unit.setAttribute('x', marginLeft-10); unit.setAttribute('y', plotTop-16);
+    unit.setAttribute('text-anchor','end');
+    unit.setAttribute('class','axis-label axis-unit');
+    unit.textContent = '\u00B0C';
+    svg.appendChild(unit);
+
     [40,20,0,-20,-40].forEach(v=>{
       const gy = y(v);
       const line = document.createElementNS(svgNS,'line');
@@ -1054,7 +1103,7 @@ scheduleMapMode();
       lbl.setAttribute('x', marginLeft-10); lbl.setAttribute('y', gy+4);
       lbl.setAttribute('text-anchor','end');
       lbl.setAttribute('class','axis-label');
-      lbl.textContent = (v>0?'+':'') + v + '\u00B0';
+      lbl.textContent = (v>0?'+':v<0?'\u2212':'') + Math.abs(v);
       svg.appendChild(lbl);
     });
 

@@ -317,6 +317,7 @@
   .value-label.max{fill:var(--sun);}
   .value-label.min{fill:var(--aurora);}
   .axis-label{font-family:var(--mono);font-size:11px;fill:var(--frost);opacity:0.45;}
+  .axis-unit{font-size:10px;letter-spacing:.06em;opacity:0.6;}
 
   /* ---------- SCIENCE ---------- */
   .science{background:var(--snow);padding:140px 0;}

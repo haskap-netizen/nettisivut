@@ -519,6 +519,30 @@ function smoothstep(edge0, edge1, x){
   return t * t * (3 - 2 * t);
 }
 
+/* ---------- Aikavääristys ----------
+   Kamerapolun p (0..1) ei enää etene tasaisella nopeudella. Alun täysi
+   pyörähdys (KF p 0..0.36, lon 0 -> 360) pidetään täsmälleen entisen
+   nopeuden mukaisena, mutta loppulähestyminen (Afrikka -> Eurooppa ->
+   Lappi) ajetaan APPROACH_SPEED-kertaisella nopeudella. Kaikki muut
+   ajoitukset (tekstit, revontulet, pinit) on ilmaistu p:n avulla, joten
+   ne seuraavat mukana automaattisesti. */
+const SPIN_END_P = 0.36;      // kohta jossa pyörähdys päättyy kamerapolulla
+const APPROACH_SPEED = 1.5;   // 1 = ennallaan, 1.5 = 50 % nopeampi loppuosa
+
+// Kulunut aika (ms) -> kamerapolun p
+function pAtMs(ms){
+  const d = CONFIG.totalDurationMs;
+  const spinMs = SPIN_END_P * d;
+  return ms <= spinMs ? ms / d : SPIN_END_P + ((ms - spinMs) / d) * APPROACH_SPEED;
+}
+// Kamerapolun p -> kulunut aika (ms). Käytetään narratiivin setTimeouteissa.
+function msAtP(f){
+  const d = CONFIG.totalDurationMs;
+  return (f <= SPIN_END_P ? f : SPIN_END_P + (f - SPIN_END_P) / APPROACH_SPEED) * d;
+}
+// Todellinen kesto ruudulla (24 s -> n. 18,9 s oletusarvoilla)
+const ANIM_END_MS = msAtP(1);
+
 /* ---------- Satelliittikuva ---------- */
 
 // Muuntaa kuvan luonnollisen pikselikoon (esim. 1024x1024) ja ikkunan koon
@@ -742,7 +766,6 @@ buildSatelliteImage();
 
 /* ---------- Ajoitus ---------- */
 function scheduleNarrative(){
-  const d = CONFIG.totalDurationMs;
   const t1 = document.getElementById('text-1');
   const t2 = document.getElementById('text-2');
   const card = document.getElementById('destination-card');
@@ -770,10 +793,10 @@ function scheduleNarrative(){
     return;
   }
 
-  setTimeout(() => t1.classList.add('visible'), d * 0.05);
-  setTimeout(() => t1.classList.remove('visible'), d * 0.40);
-  setTimeout(() => t2.classList.add('visible'), d * 0.50);
-  setTimeout(() => t2.classList.remove('visible'), d * 0.74);
+  setTimeout(() => t1.classList.add('visible'), msAtP(0.05));
+  setTimeout(() => t1.classList.remove('visible'), msAtP(0.40));
+  setTimeout(() => t2.classList.add('visible'), msAtP(0.50));
+  setTimeout(() => t2.classList.remove('visible'), msAtP(0.74));
  
   setTimeout(() => {
     if (!satReveal.dataset.failed) {
@@ -782,7 +805,7 @@ function scheduleNarrative(){
       canvas.style.transition = 'opacity 2.5s ease';
       canvas.style.opacity = '0';
     }
-  }, d * 0.96);
+  }, msAtP(0.96));
  
   setTimeout(() => {
     if (!satReveal.dataset.failed) {
@@ -790,11 +813,11 @@ function scheduleNarrative(){
       berryPin.classList.add('visible');
     }
     card.classList.add('visible');
-  }, d * 0.985);
+  }, msAtP(0.985));
  
   setTimeout(() => {
     replayBtn.classList.add('visible');
-  }, d * 0.995);
+  }, msAtP(0.995));
 }
 
 /* ---------- Animaatio ---------- */
@@ -822,7 +845,7 @@ function tick(now){
   if (!loaded) return;
 
   const elapsed = now - startTime;
-  const p = reducedMotion ? 1 : Math.min(elapsed / CONFIG.totalDurationMs, 1);
+  const p = reducedMotion ? 1 : Math.min(pAtMs(elapsed), 1);
 
   const cam = cameraStateAt(p);
   let camRadius = cam.r;
@@ -832,7 +855,7 @@ function tick(now){
   // satelliittikuvaan tuntuu jatkuvalta sukellukselta eikä pelkältä leikkauksesta.
   const postZoomMs = 2600; // sama kesto kuin CSS-risteytys/skaalaus
   if (p >= 1){
-    const postElapsed = Math.min(elapsed - CONFIG.totalDurationMs, postZoomMs);
+    const postElapsed = Math.min(elapsed - ANIM_END_MS, postZoomMs);
     const postT = postElapsed / postZoomMs;
     const eased = postT * postT * (3 - 2 * postT); // smoothstep
     camRadius = cam.r - (cam.r - cam.r * 0.62) * eased;
@@ -844,8 +867,8 @@ function tick(now){
   const targetPos = latLonToVector3(CONFIG.destination.lat, CONFIG.destination.lon, 0);
   camera.lookAt(targetPos);
 
-  if (p >= 1 && (elapsed - CONFIG.totalDurationMs) >= postZoomMs){
-    const idle = (now - startTime - CONFIG.totalDurationMs - postZoomMs) * 0.00003;
+  if (p >= 1 && (elapsed - ANIM_END_MS) >= postZoomMs){
+    const idle = (now - startTime - ANIM_END_MS - postZoomMs) * 0.00003;
     camera.position.x += Math.sin(idle) * 0.01;
     camera.position.y += Math.cos(idle * 0.8) * 0.008;
     camera.lookAt(targetPos);

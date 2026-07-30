@@ -592,11 +592,6 @@
   text-align:center; z-index:4; opacity:0; transition:opacity 1.4s ease, transform 1.4s ease;
 }
 #destination-card.visible{ opacity:1; transform:translate(-50%, 0); }
-#destination-card .eyebrow{
-  font-family:var(--body); font-weight:500; font-size:.72rem;
-  letter-spacing:.28em; text-transform:uppercase; color: var(--aurora-green);
-  margin-bottom:.5rem;
-}
 #destination-card h2{
   font-family:var(--display); font-weight:600; font-style:normal;
   font-size:clamp(2.2rem, 6vw, 4rem); margin:0; line-height:1.05;

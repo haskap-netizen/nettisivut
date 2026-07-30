@@ -61,7 +61,6 @@ function initGlobe() {
 const CONFIG = {
   destination: {
     name: SITE.globe.name,
-    eyebrow: SITE.globe.eyebrow,
     coordsLabel: "66°20′35″ N, 28°11′40″ E",
     // Siirretty pellon (orchardPoints) todelliseen keskipisteeseen, jotta
     // sykkivä piste näyttää keskeltä koko peltokaistaletta eikä sen länsipäästä.
@@ -116,7 +115,6 @@ const CONFIG = {
 };
 
 document.getElementById('dest-name').textContent = CONFIG.destination.name;
-document.querySelector('#destination-card .eyebrow').textContent = CONFIG.destination.eyebrow;
 document.getElementById('dest-coords').textContent = CONFIG.destination.coordsLabel;
 document.getElementById('text-1').textContent = CONFIG.narrative.line1;
 document.getElementById('text-2').textContent = CONFIG.narrative.line2;

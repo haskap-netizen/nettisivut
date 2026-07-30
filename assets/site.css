@@ -549,6 +549,9 @@
 @media (max-height:700px){
   #map-section.mobile-map-fallback #real-map{width:min(88vw,360px);top:32%;}
 }
+/* Kevytversiossa destination-card näyttää jo saman nimen/koordinaatit,
+   joten real-map-label piilotetaan ettei "Lapin Hunajamarja" toistu kahdesti. */
+#map-section.mobile-map-fallback #real-map-label{display:none;}
 *{ box-sizing: border-box; }
 
 #globe-canvas{

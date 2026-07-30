@@ -527,7 +527,7 @@ function smoothstep(edge0, edge1, x){
    ajoitukset (tekstit, revontulet, pinit) on ilmaistu p:n avulla, joten
    ne seuraavat mukana automaattisesti. */
 const SPIN_END_P = 0.36;      // kohta jossa pyörähdys päättyy kamerapolulla
-const APPROACH_SPEED = 1.5;   // 1 = ennallaan, 1.5 = 50 % nopeampi loppuosa
+const APPROACH_SPEED = 1.3;   // 1 = ennallaan, 1.3 = 30 % nopeampi loppuosa
 
 // Kulunut aika (ms) -> kamerapolun p
 function pAtMs(ms){
@@ -540,7 +540,7 @@ function msAtP(f){
   const d = CONFIG.totalDurationMs;
   return (f <= SPIN_END_P ? f : SPIN_END_P + (f - SPIN_END_P) / APPROACH_SPEED) * d;
 }
-// Todellinen kesto ruudulla (24 s -> n. 18,9 s oletusarvoilla)
+// Todellinen kesto ruudulla (24 s -> n. 20,5 s oletusarvoilla)
 const ANIM_END_MS = msAtP(1);
 
 /* ---------- Satelliittikuva ---------- */

@@ -338,6 +338,26 @@
   .science-varieties{list-style:none;margin:30px 0;padding:0;border-top:1px solid rgba(20,32,43,0.12);}
   .science-varieties li{padding:16px 0;border-bottom:1px solid rgba(20,32,43,0.12);color:var(--muted-text);font-size:15px;line-height:1.6;}
   .science-varieties strong{color:var(--ink-text);}
+
+  /* Lajikekuva: marjaryhmat koivupedilla vastaavat listan jarjestysta.
+     Prosentit = marjaryhmien pystykeskikohdat kuvassa. */
+  .varieties{margin:34px 0 8px;}
+  .varieties-photo img{display:block;width:100%;height:auto;
+    filter:drop-shadow(0 18px 30px rgba(20,32,43,0.15));}
+  .varieties .science-varieties{margin-top:26px;}
+  @media (min-width:900px){
+    .varieties{display:grid;grid-template-columns:minmax(0,1.32fr) minmax(240px,1fr);
+      gap:34px;align-items:stretch;margin:42px 0 12px;}
+    .varieties .science-varieties{position:relative;margin:0;border-top:0;}
+    .varieties .science-varieties li{position:absolute;left:0;right:0;
+      transform:translateY(-50%);padding:0 0 0 26px;border-bottom:0;
+      font-size:14px;line-height:1.55;}
+    .varieties .science-varieties li::before{content:"";position:absolute;left:0;top:0.72em;
+      width:16px;height:1px;background:rgba(20,32,43,0.28);}
+    .varieties .science-varieties li:nth-child(1){top:22.4%;}
+    .varieties .science-varieties li:nth-child(2){top:43.5%;}
+    .varieties .science-varieties li:nth-child(3){top:64.5%;}
+  }
   .own-harvest{margin-top:58px;padding-top:38px;border-top:1px solid rgba(20,32,43,0.16);}
   .own-harvest p{margin-bottom:0;}
 

@@ -93,7 +93,9 @@
     backdrop-filter:blur(10px);
   }
   nav .brand{font-family:var(--display);font-size:16px;letter-spacing:0.02em;font-weight:500;pointer-events:auto;text-decoration:none;color:inherit;flex:0 0 auto;white-space:nowrap;}
-  nav .nav-meta{display:flex;align-items:center;gap:18px;pointer-events:auto;flex:0 0 auto;}
+  /* Jarjestys: koordinaatit, sitten kielivalinta. Vali on sama 28 px kuin
+     navin muidenkin ryhmien valissa, jottei FI/EN takerru koordinaatteihin. */
+  nav .nav-meta{display:flex;align-items:center;gap:28px;pointer-events:auto;flex:0 0 auto;}
   nav .coords{opacity:0.85;pointer-events:auto;}
   @media(max-width:820px){nav .coords{display:none;}}
   nav .lang-switch{display:flex;align-items:center;gap:6px;white-space:nowrap;font-size:11px;letter-spacing:.08em;}

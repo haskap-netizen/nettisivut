@@ -1467,8 +1467,6 @@ scheduleMapMode();
       }
     });
 
-    // Jos ikkuna levenee tyopoytakokoon valikon ollessa auki, suljetaan se.
-    window.matchMedia('(min-width: 901px)').addEventListener('change', (e) => {
-      if (e.matches && isOpen()) setOpen(false, false);
-    });
+    // Ei leveyteen sidottua automaattista sulkemista: valikko on kaytossa
+    // kaikilla naytoilla, joten ikkunan koon muutos ei saa sulkea sita.
   });

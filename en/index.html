@@ -38,8 +38,8 @@
      sizes-arvo rajaa mobiilin pikselitiheyden jarkevaksi (kuva on tummennusgradientin alla). -->
 <link rel="preload" as="image" fetchpriority="high"
       href="../assets/hero/hero-800.webp"
-      imagesrcset="../assets/hero/hero-800.webp 800w, ../assets/hero/hero-1100.webp 1100w, ../assets/hero/hero-1400.webp 1400w"
-      imagesizes="(max-width:700px) 65vw, 61vh">
+      imagesrcset="../assets/hero/hero-800.webp 800w, ../assets/hero/hero-1100.webp 1100w, ../assets/hero/hero-1400.webp 1400w, ../assets/hero/hero-1900.webp 1900w"
+      imagesizes="(max-width:700px) 85vw, 100vw">
 
 <script>document.documentElement.classList.add('js');</script>
 
@@ -147,10 +147,8 @@ window.SITE = {
 <!-- ================= HERO ================= -->
 <header class="hero">
   <div class="hero-photo" id="heroPhoto" aria-hidden="true">
-    <img class="hero-photo-backdrop" alt="" width="1400" height="1867" decoding="async" fetchpriority="high"
-         src="../assets/hero/hero-800.webp" srcset="../assets/hero/hero-800.webp 800w, ../assets/hero/hero-1100.webp 1100w, ../assets/hero/hero-1400.webp 1400w" sizes="(max-width:700px) 65vw, 61vh">
-    <img class="hero-photo-main" alt="" width="1400" height="1867" decoding="async" fetchpriority="high"
-         src="../assets/hero/hero-800.webp" srcset="../assets/hero/hero-800.webp 800w, ../assets/hero/hero-1100.webp 1100w, ../assets/hero/hero-1400.webp 1400w" sizes="(max-width:700px) 65vw, 61vh">
+    <img class="hero-photo-main" alt="" width="1400" height="1050" decoding="async" fetchpriority="high"
+         src="../assets/hero/hero-800.webp" srcset="../assets/hero/hero-800.webp 800w, ../assets/hero/hero-1100.webp 1100w, ../assets/hero/hero-1400.webp 1400w, ../assets/hero/hero-1900.webp 1900w" sizes="(max-width:700px) 85vw, 100vw">
   </div>
   <canvas id="stars"></canvas>
   <svg class="aurora-svg" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true">
@@ -183,13 +181,18 @@ window.SITE = {
   </svg>
   <div class="hero-content">
     <h1>Arctic<br><em>Haskap</em></h1>
+  </div>
+</header>
+
+<section class="hero-intro">
+  <div class="wrap">
     <p class="hero-sub">Organic arctic haskap from one of the northernmost berry farms in the world. Our family farm is located in Posio, Finnish Lapland, where long, freezing winters, protective snow cover and the midnight sun create a unique growing environment for haskap. We care for the soil and plants on nature’s terms — northern light, a clean growing environment and living soil do the rest.</p>
     <div class="hero-meta">
       <div><strong>2.5 ha</strong>under cultivation, 9,000 plants</div>
       <div><strong>2027</strong>first commercial harvest</div>
     </div>
   </div>
-</header>
+</section>
 
 <!-- ================= SCIENCE ================= -->
 <section class="science" id="science">

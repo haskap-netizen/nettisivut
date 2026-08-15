@@ -79,11 +79,16 @@
     pointer-events:none;
     transition:background-color .25s ease,box-shadow .25s ease,padding .25s ease;
   }
+  /* Palkin korkeutta ei maarita teksti vaan 44x44 px hampurilaispainike
+     (kosketuskohteen minimikoko). Painikkeen sisalla on jo 15 px tyhjaa,
+     joten ulkoreunus voi olla pieni; min-height pitaa palkin samana myos
+     leveilla naytoilla, joilla painike on piilossa. */
   nav.scrolled{
     mix-blend-mode:normal;
-    padding:14px 32px;
-    background:rgba(10,20,32,.90);
-    box-shadow:0 1px 0 rgba(255,255,255,.08);
+    padding:6px 32px;
+    min-height:56px;
+    background:rgba(22,18,42,.92);
+    box-shadow:0 1px 0 rgba(239,185,76,.30);
     -webkit-backdrop-filter:blur(10px);
     backdrop-filter:blur(10px);
   }

@@ -352,6 +352,16 @@
   .extremes-chart{width:100%;}
   .extremes-chart svg{width:100%;height:auto;display:block;overflow:visible;}
   .chart-note{margin-top:22px;font-family:var(--mono);font-size:12px;color:var(--frost);opacity:0.78;}
+  /* Makutasapaino: sitoo yhteen valokayran (#seasons) ja lampotilakayran,
+     joten se sijaitsee vasta kaavion jalkeen. Mitat .science-copyn mukaan,
+     varit tumman taustan mukaan. */
+  .balance{max-width:820px;margin-top:96px;padding-top:44px;
+    border-top:1px solid rgba(246,248,247,0.14);}
+  .balance .eyebrow{color:var(--sun);margin-bottom:18px;}
+  .balance h3{font-size:clamp(25px,3vw,34px);line-height:1.2;margin-bottom:22px;font-weight:400;}
+  .balance p{color:var(--frost);font-size:16px;line-height:1.8;margin-bottom:20px;font-weight:400;}
+  .balance p:last-child{margin-bottom:0;}
+  @media(max-width:640px){.balance{margin-top:64px;padding-top:34px;}}
   .bar-group{opacity:0;transform:translateY(14px);transition:opacity .7s cubic-bezier(.19,1,.22,1), transform .7s cubic-bezier(.19,1,.22,1);transition-delay:calc(var(--i) * 55ms);}
   .extremes-chart svg.chart-in .bar-group{opacity:1;transform:translateY(0);}
   .month-label{font-family:var(--mono);font-size:13px;fill:var(--frost);opacity:0.8;}

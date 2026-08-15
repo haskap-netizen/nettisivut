@@ -114,15 +114,6 @@ window.SITE = {
 
 <nav id="story" aria-label="Päävalikko">
   <a class="brand" href="#top" aria-label="Lapin Hunajamarja – sivun alkuun">Lapin Hunajamarja</a>
-  <div class="nav-links">
-    <a href="#science">Hunajamarja</a>
-    <a href="#practices">Viljely</a>
-    <a href="#seasons">Kasvuolosuhteet</a>
-    <a href="#map-section">Sijainti</a>
-    <a href="#gallery">Galleria</a>
-    <a href="#trailcam">Riistakamera</a>
-    <a href="#contact">Yhteys</a>
-  </div>
   <div class="nav-meta">
     <div class="lang-switch" role="navigation" aria-label="Kielivalinta">
       <span aria-current="page">FI</span><span aria-hidden="true">/</span><a href="en/" lang="en" hreflang="en">EN</a>
@@ -130,10 +121,11 @@ window.SITE = {
     <span class="coords">66°N · POSIO, SUOMEN LAPPI</span>
   </div>
   <button class="nav-toggle" id="nav-toggle" aria-label="Valikko" aria-expanded="false" aria-controls="mobile-menu">
-    <span></span><span></span><span></span>
+    <span class="nav-toggle-label">Valikko</span>
+    <span class="nav-toggle-icon"><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
   </button>
 </nav>
-<nav class="mobile-menu" id="mobile-menu" aria-label="Mobiilivalikko">
+<nav class="mobile-menu" id="mobile-menu" aria-label="Sivun osiot">
   <a href="#science">Hunajamarja</a>
   <a href="#practices">Viljely</a>
   <a href="#seasons">Kasvuolosuhteet</a>
@@ -141,6 +133,7 @@ window.SITE = {
   <a href="#gallery">Galleria</a>
   <a href="#trailcam">Riistakamera</a>
   <a href="#contact">Yhteys</a>
+  <span class="mobile-menu-coords">66°N · POSIO, SUOMEN LAPPI</span>
 </nav>
 
 <main id="main">

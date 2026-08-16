@@ -415,16 +415,24 @@
   .practices-head h2{font-size:clamp(30px,4.2vw,48px);color:var(--ink-text);line-height:1.1;}
   .practices-head p{margin-top:20px;color:var(--muted-text);font-size:16px;line-height:1.75;max-width:560px;}
 
-  /* Viljelyfilosofian kuva: heinä oksien seassa = pysyvä kasvipeite. */
-  .practices-intro{margin-bottom:70px;}
-  .practices-intro .practices-head{margin-bottom:0;}
+  /* Viljelyfilosofian kuva: heinä oksien seassa = pysyvä kasvipeite.
+     Kuva ulottuu yli 900px kahden rivin yli, jolloin sen alareuna on samassa
+     linjassa aikajanan otsikon kanssa eikä kuva jää leijumaan tyhjään. */
+  .practices-intro{margin-bottom:0;}
+  .practices-intro .practices-head{margin-bottom:44px;}
   .practices-photo{margin-top:34px;}
   .practices-photo img{display:block;width:100%;height:auto;
     filter:drop-shadow(0 18px 30px rgba(20,32,43,0.15));}
   @media (min-width:900px){
-    .practices-intro{display:grid;grid-template-columns:minmax(0,640px) minmax(260px,400px);
-      gap:60px;justify-content:space-between;align-items:start;}
-    .practices-photo{margin-top:6px;}
+    .practices-intro{display:grid;
+      grid-template-columns:minmax(0,640px) minmax(260px,400px);
+      column-gap:60px;justify-content:space-between;margin-bottom:40px;}
+    .practices-intro .practices-head{grid-column:1;grid-row:1;
+      max-width:none;margin-bottom:56px;}
+    .practices-intro .practices-head p{max-width:640px;}
+    .practices-photo{grid-column:2;grid-row:1 / span 2;margin-top:6px;align-self:start;}
+    .practices-intro .timeline-title{grid-column:1;grid-row:2;
+      align-self:end;margin-bottom:0;}
   }
 
   .timeline-title{font-family:var(--body);font-size:15px;font-weight:800;letter-spacing:0.08em;margin-bottom:40px;color:var(--berry);}

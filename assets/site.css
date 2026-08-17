@@ -127,10 +127,13 @@
      ja hieman vaakapehmustetta, jolloin osumapinta on ohjeiden mukainen vaikka
      kirjasin on 12 px. Nav ei kasva, koska valikkopainike on jo 44 px korkea. */
   nav .lang-switch{display:flex;align-items:center;gap:2px;white-space:nowrap;font-size:11px;letter-spacing:.05em;}
-  nav .lang-switch a{color:inherit;text-decoration:none;opacity:.65;transition:opacity .2s;
+  nav .lang-switch a{color:inherit;text-decoration:none;opacity:.45;transition:opacity .2s;
     display:inline-flex;align-items:center;justify-content:center;min-width:24px;min-height:44px;}
   nav .lang-switch a:hover,nav .lang-switch a:focus-visible{opacity:1;}
-  nav .lang-switch [aria-current="page"]{font-weight:700;opacity:1;}
+  /* Ei lihavointia: mono-kirjasimesta on itse isannoituna vain 400 ja 500,
+     joten 700 piirtyi selaimen synteettisena lihavointina. Aktiivinen kieli
+     erottuu nyt pelkalla peittavyydella 1 vs 0,45. */
+  nav .lang-switch [aria-current="page"]{font-weight:400;opacity:1;}
 
   /* Valikkopainike on kaytossa kaikilla leveyksilla, joten pelkka kuvake ei
      riita: isolla naytolla kolme viivaa jaa helposti huomaamatta. Sana on

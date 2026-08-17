@@ -537,7 +537,28 @@
 
   /* ---------- FOOTER ---------- */
   footer{background:var(--ink);color:var(--frost);padding:64px 0 40px;border-top:1px solid var(--line);}
-  .footer-bottom{padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:var(--mono);font-size:11px;opacity:0.8;}
+  .footer-bottom{padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:var(--mono);font-size:12px;opacity:0.8;}
+  .footer-legal{color:inherit;text-decoration:underline;text-underline-offset:3px;opacity:.85;}
+  .footer-legal:hover,.footer-legal:focus-visible{opacity:1;}
+
+  /* Tietosuojaseloste — oma sivu, käyttää samaa tyylitiedostoa. */
+  .legal{background:var(--paper);padding:130px 0 100px;}
+  .legal .wrap{max-width:760px;}
+  .legal .back{display:inline-block;margin-bottom:34px;font-family:var(--mono);font-size:12px;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--berry);text-decoration:none;}
+  .legal .back:hover,.legal .back:focus-visible{text-decoration:underline;text-underline-offset:4px;}
+  .legal h1{font-family:var(--display);font-weight:500;color:var(--ink-text);
+    font-size:clamp(28px,4.2vw,42px);line-height:1.15;}
+  .legal .updated{margin-top:12px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--muted-text);}
+  .legal h2{font-family:var(--display);font-weight:500;color:var(--ink-text);
+    font-size:22px;margin:44px 0 12px;}
+  .legal p,.legal li{color:var(--muted-text);font-size:16px;line-height:1.75;}
+  .legal p+p{margin-top:14px;}
+  .legal ul{margin:12px 0 0 20px;}
+  .legal li{margin-bottom:8px;}
+  .legal a{color:var(--ink-text);text-decoration:underline;text-underline-offset:3px;}
+  .legal .contact-lines{margin-top:12px;font-family:var(--mono);font-size:13px;line-height:2;color:var(--ink-text);}
 
   @media (prefers-reduced-motion: reduce){
     *{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;scroll-behavior:auto !important;}

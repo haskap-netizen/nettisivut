@@ -56,9 +56,7 @@ window.SITE = {
     loadError: 'Karttapalloa ei voitu ladata'
   },
   charts: {
-    monthsShort: ['Tam','Hel','Maa','Huh','Tou','Kes','Hei','Elo','Syy','Lok','Mar','Jou'],
-    monthsLong:  ['Tammi','Helmi','Maalis','Huhti','Touko','Kesä','Heinä','Elo','Syys','Loka','Marras','Joulu'],
-    midnightSunLabel: '24 h (yötön yö)'
+    monthsLong:  ['Tammi','Helmi','Maalis','Huhti','Touko','Kesä','Heinä','Elo','Syys','Loka','Marras','Joulu']
   }
 };
 </script>
@@ -385,7 +383,7 @@ window.SITE = {
       </svg>
       <div class="tl-legend">
         <span><span class="dot sun"></span> Päivänvalon määrä</span>
-        <span><span class="dot sun-high"></span> Yötön yö (yli 20 h)</span>
+        <span><span class="dot sun-high"></span> Yötön yö</span>
       </div>
       <p class="daylight-source">Lähde: Laskettu tilan koordinaateille (66°20′35″ N) vakiintuneella auringonnousu-laskukaavalla, joka huomioi ilmakehän taittumisen. Vrt. Helsingin yliopiston almanakkatoimisto (almanakka.helsinki.fi).</p>
     </div>
@@ -399,7 +397,7 @@ window.SITE = {
       <div class="eyebrow">POHJOISEN LÄMPÖTILOJEN ÄÄRIPÄÄT</div>
       <h2>Kuukausittaiset ylimmät ja alimmat mitatut lämpötilat</h2>
       <noscript><p class="chart-note">Kaavion piirtämiseen tarvitaan JavaScript. Mitatut ääriarvot vaihtelevat tammikuun −34,8 °C:sta kesäkuun +28,2 °C:seen.</p></noscript>
-      <p>Ennätykset ovat syntyneet eri ajankohtina pitkän havaintohistorian aikana, eivät yhden vuoden kuluessa. Heinäkuun helteiden ja tammikuun pakkasten välinen valtava vaihtelu kertoo pohjoisen voimakkaasta vuodenkierrosta – olosuhteista, joihin hunajamarja on luontaisesti sopeutunut.</p>
+      <p>Ennätykset ovat syntyneet eri ajankohtina pitkän havaintohistorian aikana, eivät yhden vuoden kuluessa. Kesän helteiden ja tammikuun pakkasten välinen valtava vaihtelu kertoo pohjoisen voimakkaasta vuodenkierrosta – olosuhteista, joihin hunajamarja on luontaisesti sopeutunut.</p>
     </div>
     <div class="extremes-chart reveal">
       <svg id="tempChart" viewBox="0 0 1160 470" xmlns="http://www.w3.org/2000/svg">
@@ -593,6 +591,7 @@ window.SITE = {
       <div class="tc-tile reveal"><img decoding="async" src="assets/trailcam/trailcam-18.webp" srcset="assets/trailcam/trailcam-18-mobile.webp 700w, assets/trailcam/trailcam-18.webp 960w" sizes="(max-width: 460px) 50vw, (max-width: 700px) 33vw, (max-width: 980px) 25vw, (min-width: 1180px) 220px, 20vw" alt="27.4.2026 klo 11:34, −1°C — kevään sulamisvaihe" loading="lazy" width="960" height="540"></div>
       <div class="tc-tile reveal"><img decoding="async" src="assets/trailcam/trailcam-19.webp" srcset="assets/trailcam/trailcam-19-mobile.webp 700w, assets/trailcam/trailcam-19.webp 960w" sizes="(max-width: 460px) 50vw, (max-width: 700px) 33vw, (max-width: 980px) 25vw, (min-width: 1180px) 220px, 20vw" alt="23.5.2026 klo 10:43, 16°C — touko-kesäkuun vihreys" loading="lazy" width="960" height="540"></div>
       <div class="tc-tile reveal"><img decoding="async" src="assets/trailcam/trailcam-20.webp" srcset="assets/trailcam/trailcam-20-mobile.webp 700w, assets/trailcam/trailcam-20.webp 960w" sizes="(max-width: 460px) 50vw, (max-width: 700px) 33vw, (max-width: 980px) 25vw, (min-width: 1180px) 220px, 20vw" alt="11.6.2026 klo 11:27, 16°C — kesäkuun rehevä kasvusto" loading="lazy" width="960" height="540"></div>
+      <div class="tc-tile reveal"><img decoding="async" src="assets/trailcam/trailcam-21.webp" srcset="assets/trailcam/trailcam-21-mobile.webp 700w, assets/trailcam/trailcam-21.webp 960w" sizes="(max-width: 460px) 50vw, (max-width: 700px) 33vw, (max-width: 980px) 25vw, (min-width: 1180px) 220px, 20vw" alt="15.9.2026 klo 19:24, 6°C — ruska pellon laidalla" loading="lazy" width="960" height="540"></div>
     </div>
     <p class="trailcam-note">Päivämäärä, kellonaika ja lämpötila ovat kameran itsensä kuviin tallentamia.</p>
   </div>

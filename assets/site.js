@@ -619,6 +619,7 @@ function buildSatelliteImage(){
   const reveal = document.getElementById('sat-reveal');
   const img = new Image();
   img.crossOrigin = 'anonymous';
+  img.referrerPolicy = 'no-referrer'; // Esri ei saa tietaa mista sivulta pyynto tulee
 
   // lon/lat -> kuvan pikselikoordinaatti (riippuu vain bbox:sta ja kuvan koosta)
   const pxX = (lonVal, w) => (lonVal - minLon) / (maxLon - minLon) * w;
@@ -760,7 +761,9 @@ function buildSatelliteImage(){
   img.onerror = () => { reveal.dataset.failed = '1'; };
   img.src = url;
 }
-buildSatelliteImage();
+// Satelliittikuva haetaan Esrilta vasta kun animaatio kaynnistyy (startMapAnimation),
+// ei jo pallon alustuksessa: alustus tapahtuu tyopoydalla ennakkoon (rootMargin 150 %),
+// ja tietosuojaselosteen mukaan yhteys Esriin syntyy vasta animaation alkaessa.
 
 /* ---------- Ajoitus ---------- */
 function scheduleNarrative(){
@@ -833,6 +836,7 @@ function startMapAnimation(){
   if (mapStarted || !loaded) return;
   mapStarted = true;
   startTime = performance.now();
+  buildSatelliteImage();
   scheduleNarrative();
   requestAnimationFrame(tick);
 }
@@ -1074,8 +1078,68 @@ scheduleMapMode();
     revealEls.forEach(el=>io.observe(el));
   });
 
+  // ---- responsiiviset kaaviot: yhteiset apurit ----
+  // Leveassa naytossa kaaviot ovat pystypylvaita kiintealla viewBoxilla, joka skaalautuu.
+  // Kapeassa (alle CHART_NARROW px) sama viewBox kutistaisi tekstin jopa 4 pikseliin, joten
+  // silloin piirretaan vaakarivit ja viewBoxin leveys = todellinen leveys, eli teksti 1:1.
+  const CHART_NARROW = 860;
+  const SVGNS = 'http://www.w3.org/2000/svg';
+  function svgEl(tag, attrs, parent){
+    const el = document.createElementNS(SVGNS, tag);
+    for (const k in attrs) el.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(el);
+    return el;
+  }
+  function clearChart(svg){
+    Array.from(svg.childNodes).forEach(n => { if (n.nodeName.toLowerCase() !== 'defs') svg.removeChild(n); });
+  }
+  function ensureHGrad(svg, id, stops){
+    if (svg.querySelector('#' + id)) return;
+    const defs = svg.querySelector('defs') || svgEl('defs', {}, svg);
+    const g = svgEl('linearGradient', {id: id, x1: 0, y1: 0, x2: 1, y2: 0}, defs);
+    stops.forEach(([o, c]) => svgEl('stop', {offset: o, 'stop-color': c}, g));
+  }
+  // Piirtaa kaavion ja piirtaa uudelleen vain kun asettelu tai kapean tilan leveys muuttuu.
+  function responsiveChart(svg, draw, onIn){
+    const host = svg.parentElement;
+    let key = null;
+    const render = () => {
+      // Sisaltoleveys ilman pehmustetta (paivanpituuskaavion kehyksella on padding).
+      const cs = getComputedStyle(host);
+      const w = Math.round(host.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight));
+      if (!w) return;
+      const narrow = w < CHART_NARROW;
+      const k = narrow ? 'n' + w : 'w';
+      if (k === key) return;
+      key = k;
+      clearChart(svg);
+      svg.classList.toggle('is-narrow', narrow);
+      draw(narrow, w);
+      if (svg.classList.contains('chart-in')) onIn(true);
+    };
+    render();
+    if ('ResizeObserver' in window){
+      let raf = null;
+      new ResizeObserver(() => {
+        if (raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(render);
+      }).observe(host);
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting){
+          svg.classList.add('chart-in');
+          onIn(false);
+          io.unobserve(svg);
+        }
+      });
+    }, { threshold: 0.2 });
+    io.observe(svg);
+  }
+
   // ---- temperature extremes chart ----
-  // Kuukausien nimet tulevat SITE.charts.monthsShort-taulukosta (kielikohtainen),
+  // Kuukausien nimet tulevat SITE.charts.monthsLong-taulukosta (kielikohtainen, samat kuin
+  // paivanpituuskaaviossa),
   // mittausarvot ovat samat molemmilla kielilla.
   const tempValues = [
     {max:2.6,  min:-34.8}, {max:2.4,  min:-30.0}, {max:6.4,  min:-21.2},
@@ -1083,239 +1147,184 @@ scheduleMapMode();
     {max:28.0, min:0.2},   {max:27.5, min:-0.6},  {max:21.2, min:-5.1},
     {max:13.3, min:-16.2}, {max:6.7,  min:-19.9}, {max:3.1,  min:-27.5},
   ];
-  const tempData = tempValues.map((v, i) => ({m: SITE.charts.monthsShort[i], max: v.max, min: v.min}));
+  const tempData = tempValues.map((v, i) => ({m: SITE.charts.monthsLong[i], max: v.max, min: v.min}));
   function fmtTemp(v){
     const rounded = Math.round(v);
     if(rounded>0) return '+'+rounded+'°';
     if(rounded===0) return '0°';
-    return '\u2212'+Math.abs(rounded)+'°';
+    return '−'+Math.abs(rounded)+'°';
   }
-  function buildTempChart(){
-    const svgNS = 'http://www.w3.org/2000/svg';
-    const svg = document.getElementById('tempChart');
+  const tickLabel = v => (v>0?'+':v<0?'−':'') + Math.abs(v);
+
+  function drawTempWide(svg){
     const W = 1160, marginLeft = 44, marginRight = 16;
     const plotTop = 34, plotBottom = 388;
     const domainTop = 40, domainBottom = -50;
     const plotHeight = plotBottom - plotTop;
     const y = (val) => plotTop + (domainTop - val) / (domainTop - domainBottom) * plotHeight;
     const y0 = y(0);
-    const usableW = W - marginLeft - marginRight;
-    const slot = usableW / tempData.length;
+    const slot = (W - marginLeft - marginRight) / tempData.length;
     const barW = slot * 0.44;
+    svg.setAttribute('viewBox', '0 0 1160 470');
 
-    // Yksikko merkitaan kerran y-akselin ylapaahan, ei jokaiseen asteikkolukemaan:
-    // otsikossa (°C) oli otsikkokoossa turhan hallitseva.
-    const unit = document.createElementNS(svgNS,'text');
-    unit.setAttribute('x', marginLeft-10); unit.setAttribute('y', plotTop-16);
-    unit.setAttribute('text-anchor','end');
-    unit.setAttribute('class','axis-label axis-unit');
-    unit.textContent = '\u00B0C';
-    svg.appendChild(unit);
+    // Yksikko merkitaan kerran y-akselin ylapaahan, ei jokaiseen asteikkolukemaan.
+    svgEl('text', {x: marginLeft-10, y: plotTop-16, 'text-anchor': 'end', class: 'axis-label axis-unit'}, svg).textContent = '°C';
 
     [40,20,0,-20,-40].forEach(v=>{
       const gy = y(v);
-      const line = document.createElementNS(svgNS,'line');
-      line.setAttribute('x1', marginLeft); line.setAttribute('x2', W-marginRight);
-      line.setAttribute('y1', gy); line.setAttribute('y2', gy);
-      line.setAttribute('stroke', 'rgba(185,199,209,0.14)');
-      line.setAttribute('stroke-width', v===0 ? 1.2 : 1);
-      svg.appendChild(line);
-      const lbl = document.createElementNS(svgNS,'text');
-      lbl.setAttribute('x', marginLeft-10); lbl.setAttribute('y', gy+4);
-      lbl.setAttribute('text-anchor','end');
-      lbl.setAttribute('class','axis-label');
-      lbl.textContent = (v>0?'+':v<0?'\u2212':'') + Math.abs(v);
-      svg.appendChild(lbl);
+      svgEl('line', {x1: marginLeft, x2: W-marginRight, y1: gy, y2: gy,
+        stroke: 'rgba(185,199,209,0.14)', 'stroke-width': v===0 ? 1.2 : 1}, svg);
+      svgEl('text', {x: marginLeft-10, y: gy+4, 'text-anchor': 'end', class: 'axis-label'}, svg).textContent = tickLabel(v);
     });
 
     tempData.forEach((d,i)=>{
       const cx = marginLeft + i*slot + slot/2;
-      const g = document.createElementNS(svgNS,'g');
-      g.setAttribute('class','bar-group');
+      const g = svgEl('g', {class: 'bar-group'}, svg);
       g.style.setProperty('--i', i);
+      const maxTop = y(d.max), minBottom = y(d.min);
+      svgEl('rect', {x: cx-barW/2, y: maxTop, width: barW, height: Math.max(2, y0-maxTop), rx: 5, fill: 'url(#maxGrad)'}, g);
+      svgEl('rect', {x: cx-barW/2, y: y0, width: barW, height: Math.max(2, minBottom-y0), rx: 5, fill: 'url(#minGrad)'}, g);
+      svgEl('text', {x: cx, y: maxTop-10, 'text-anchor': 'middle', class: 'value-label max'}, g).textContent = fmtTemp(d.max);
+      svgEl('text', {x: cx, y: minBottom+20, 'text-anchor': 'middle', class: 'value-label min'}, g).textContent = fmtTemp(d.min);
+      svgEl('text', {x: cx, y: plotBottom+34, 'text-anchor': 'middle', class: 'month-label'}, g).textContent = d.m;
+    });
+  }
 
-      const maxTop = y(d.max);
-      const maxRect = document.createElementNS(svgNS,'rect');
-      maxRect.setAttribute('x', cx-barW/2);
-      maxRect.setAttribute('y', maxTop);
-      maxRect.setAttribute('width', barW);
-      maxRect.setAttribute('height', Math.max(2, y0-maxTop));
-      maxRect.setAttribute('rx', 5);
-      maxRect.setAttribute('fill', 'url(#maxGrad)');
-      g.appendChild(maxRect);
+  // Kapea naytto: kuukausi per rivi, pakkaset vasemmalle ja helteet oikealle nollasta.
+  function drawTempNarrow(svg, W){
+    ensureHGrad(svg, 'maxGradH', [['0%','#C98F2E'],['100%','#F4CE7A']]);
+    ensureHGrad(svg, 'minGradH', [['0%','#5FE3B3'],['100%','#2E9C82']]);
+    const L = 60, R = 8, plotTop = 32, rowH = 28, barT = 14;
+    const H = plotTop + tempData.length*rowH + 6;
+    const dl = -50, dr = 45;
+    const x = v => L + (v - dl) / (dr - dl) * (W - L - R);
+    const x0 = x(0);
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
 
-      const minBottom = y(d.min);
-      const minRect = document.createElementNS(svgNS,'rect');
-      minRect.setAttribute('x', cx-barW/2);
-      minRect.setAttribute('y', y0);
-      minRect.setAttribute('width', barW);
-      minRect.setAttribute('height', Math.max(2, minBottom-y0));
-      minRect.setAttribute('rx', 5);
-      minRect.setAttribute('fill', 'url(#minGrad)');
-      g.appendChild(minRect);
-
-      const maxLbl = document.createElementNS(svgNS,'text');
-      maxLbl.setAttribute('x', cx); maxLbl.setAttribute('y', maxTop-10);
-      maxLbl.setAttribute('text-anchor','middle');
-      maxLbl.setAttribute('class','value-label max');
-      maxLbl.textContent = fmtTemp(d.max);
-      g.appendChild(maxLbl);
-
-      const minLbl = document.createElementNS(svgNS,'text');
-      minLbl.setAttribute('x', cx); minLbl.setAttribute('y', minBottom+20);
-      minLbl.setAttribute('text-anchor','middle');
-      minLbl.setAttribute('class','value-label min');
-      minLbl.textContent = fmtTemp(d.min);
-      g.appendChild(minLbl);
-
-      const mLbl = document.createElementNS(svgNS,'text');
-      mLbl.setAttribute('x', cx); mLbl.setAttribute('y', plotBottom+34);
-      mLbl.setAttribute('text-anchor','middle');
-      mLbl.setAttribute('class','month-label');
-      mLbl.textContent = d.m;
-      g.appendChild(mLbl);
-
-      svg.appendChild(g);
+    svgEl('text', {x: L-10, y: plotTop-14, 'text-anchor': 'end', class: 'axis-label axis-unit'}, svg).textContent = '°C';
+    [-40,-20,0,20,40].forEach(v=>{
+      const gx = x(v);
+      svgEl('line', {x1: gx, x2: gx, y1: plotTop-6, y2: H-4,
+        stroke: 'rgba(185,199,209,0.14)', 'stroke-width': v===0 ? 1.2 : 1}, svg);
+      svgEl('text', {x: gx, y: plotTop-14, 'text-anchor': 'middle', class: 'axis-label'}, svg).textContent = tickLabel(v);
     });
 
-    const chartIo = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){
-          svg.classList.add('chart-in');
-          chartIo.unobserve(svg);
-        }
-      });
-    },{threshold:0.2});
-    chartIo.observe(svg);
+    tempData.forEach((d,i)=>{
+      const cy = plotTop + i*rowH + rowH/2;
+      const g = svgEl('g', {class: 'bar-group'}, svg);
+      g.style.setProperty('--i', i);
+      const xMin = x(d.min), xMax = x(d.max);
+      svgEl('rect', {x: xMin, y: cy-barT/2, width: Math.max(2, x0-xMin), height: barT, rx: 4, fill: 'url(#minGradH)'}, g);
+      svgEl('rect', {x: x0, y: cy-barT/2, width: Math.max(2, xMax-x0), height: barT, rx: 4, fill: 'url(#maxGradH)'}, g);
+      svgEl('text', {x: xMin-6, y: cy+4.5, 'text-anchor': 'end', class: 'value-label min'}, g).textContent = fmtTemp(d.min);
+      svgEl('text', {x: xMax+6, y: cy+4.5, 'text-anchor': 'start', class: 'value-label max'}, g).textContent = fmtTemp(d.max);
+      svgEl('text', {x: L-10, y: cy+4.5, 'text-anchor': 'end', class: 'month-label'}, g).textContent = d.m;
+    });
   }
-  safe('tempChart', buildTempChart);
 
-  // ---- daylight timeline (horizontal bar chart) ----
+  safe('tempChart', function(){
+    const svg = document.getElementById('tempChart');
+    if (!svg) return;
+    responsiveChart(svg,
+      (narrow, w) => narrow ? drawTempNarrow(svg, w) : drawTempWide(svg),
+      () => {});  // pylvasryhmien sisaantulo hoituu CSS:lla .chart-in-luokasta
+  });
+
+  // ---- daylight timeline ----
   // Kuukausien nimet tulevat SITE.charts.monthsLong-taulukosta (kielikohtainen).
   const daylightHours = [4.5, 8.2, 11.8, 15.5, 19.6, 23.7, 21.2, 16.8, 13.1, 9.4, 5.7, 2.8];
   const daylightData = daylightHours.map((h, i) => ({m: SITE.charts.monthsLong[i], h: h}));
 
-  function buildDaylightTimeline(){
-    const svgNS = 'http://www.w3.org/2000/svg';
-    const svg = document.getElementById('daylightTimeline');
-    if(!svg) return;
-
-    const W = 1100, H = 280;
-    const L = 60, R = 40;
+  function drawDaylightWide(svg){
+    const W = 1100, L = 60, R = 40;
     const chartW = W - L - R;
-    const barH = 130;
-    const barTop = 55;
-    const bottomY = barTop + barH;
-
+    const barH = 130, barTop = 55, bottomY = barTop + barH;
     const maxH = 24;
     const gap = chartW / daylightData.length;
     const barW = gap * 0.5;
+    svg.setAttribute('viewBox', '0 0 1100 280');
 
-    // Y-axis labels
     [0, 6, 12, 18, 24].forEach(v => {
       const yPos = bottomY - (v / maxH) * barH;
-      const line = document.createElementNS(svgNS, 'line');
-      line.setAttribute('x1', L - 6);
-      line.setAttribute('x2', W - R);
-      line.setAttribute('y1', yPos);
-      line.setAttribute('y2', yPos);
-      line.setAttribute('stroke', 'rgba(185,199,209,0.12)');
-      line.setAttribute('stroke-width', v === 0 || v === 24 ? 0.5 : 1);
-      svg.appendChild(line);
-
-      const lbl = document.createElementNS(svgNS, 'text');
-      lbl.setAttribute('x', L - 12);
-      lbl.setAttribute('y', yPos + 4);
-      lbl.setAttribute('text-anchor', 'end');
-      lbl.setAttribute('class', 'tl-axis');
-      lbl.textContent = v + ' h';
-      svg.appendChild(lbl);
+      svgEl('line', {x1: L-6, x2: W-R, y1: yPos, y2: yPos, stroke: 'rgba(185,199,209,0.12)',
+        'stroke-width': v === 0 || v === 24 ? 0.5 : 1}, svg);
+      svgEl('text', {x: L-12, y: yPos+4, 'text-anchor': 'end', class: 'tl-axis'}, svg).textContent = v + ' h';
     });
 
-    // 24h reference line (yötön yö threshold)
-    const y24 = bottomY - (24 / maxH) * barH;
-    const refLine = document.createElementNS(svgNS, 'line');
-    refLine.setAttribute('x1', L);
-    refLine.setAttribute('x2', W - R);
-    refLine.setAttribute('y1', y24);
-    refLine.setAttribute('y2', y24);
-    refLine.setAttribute('stroke', 'rgba(239,185,76,0.15)');
-    refLine.setAttribute('stroke-width', 1);
-    refLine.setAttribute('stroke-dasharray', '4,4');
-    svg.appendChild(refLine);
-
-    const refLabel = document.createElementNS(svgNS, 'text');
-    refLabel.setAttribute('x', W - R - 6);
-    refLabel.setAttribute('y', y24 - 6);
-    refLabel.setAttribute('text-anchor', 'end');
-    refLabel.setAttribute('class', 'tl-axis');
-    refLabel.setAttribute('fill', 'rgba(239,185,76,0.4)');
-    refLabel.textContent = SITE.charts.midnightSunLabel;
-    svg.appendChild(refLabel);
+    // 24 h viiva katkoviivana. Erillista tekstia ei tarvita: akselissa lukee jo 24 h,
+    // ja yotton yo kerrotaan kerran, kaavion alla olevassa selitteessa.
+    const y24 = bottomY - barH;
+    svgEl('line', {x1: L, x2: W-R, y1: y24, y2: y24, stroke: 'rgba(239,185,76,0.15)',
+      'stroke-width': 1, 'stroke-dasharray': '4,4'}, svg);
 
     daylightData.forEach((d, i) => {
       const cx = L + i * gap + gap / 2;
       const barHeight = (d.h / maxH) * barH;
       const isHigh = d.h >= 20;
-
-      // Bar
-      const rect = document.createElementNS(svgNS, 'rect');
-      rect.setAttribute('x', cx - barW / 2);
-      rect.setAttribute('y', bottomY - barHeight);
-      rect.setAttribute('width', barW);
-      rect.setAttribute('height', barHeight);
-      rect.setAttribute('rx', 3);
-      rect.setAttribute('class', isHigh ? 'tl-bar-high' : 'tl-bar');
+      const rect = svgEl('rect', {x: cx-barW/2, y: bottomY-barHeight, width: barW, height: barHeight, rx: 3,
+        class: isHigh ? 'tl-bar-high' : 'tl-bar'}, svg);
       rect.style.setProperty('--i', i);
       rect.style.transform = 'scaleY(0)';
       rect.style.transformOrigin = 'bottom';
-      svg.appendChild(rect);
-
-      // Value label on top of bar
-      const valLbl = document.createElementNS(svgNS, 'text');
-      valLbl.setAttribute('x', cx);
-      valLbl.setAttribute('y', bottomY - barHeight - 8);
-      valLbl.setAttribute('class', isHigh ? 'tl-label-high' : 'tl-label');
+      const valLbl = svgEl('text', {x: cx, y: bottomY-barHeight-8, class: isHigh ? 'tl-label-high' : 'tl-label'}, svg);
       valLbl.style.setProperty('--i', i);
       valLbl.textContent = Math.round(d.h) + ' h';
-      svg.appendChild(valLbl);
+      svgEl('text', {x: cx, y: bottomY+24, 'text-anchor': 'middle', class: 'tl-month'}, svg).textContent = d.m;
+      svgEl('line', {x1: cx, x2: cx, y1: bottomY+4, y2: bottomY+12, stroke: 'rgba(185,199,209,0.2)', 'stroke-width': 1}, svg);
+    });
+  }
 
-      // Month label
-      const mLbl = document.createElementNS(svgNS, 'text');
-      mLbl.setAttribute('x', cx);
-      mLbl.setAttribute('y', bottomY + 24);
-      mLbl.setAttribute('text-anchor', 'middle');
-      mLbl.setAttribute('class', 'tl-month');
-      mLbl.textContent = d.m;
-      svg.appendChild(mLbl);
+  // Kapea naytto: kuukausi per rivi, palkki kasvaa vasemmalta oikealle.
+  function drawDaylightNarrow(svg, W){
+    const L = 58, R = 44, plotTop = 28, rowH = 26, barT = 13;
+    const rowsBottom = plotTop + daylightData.length*rowH;
+    const H = rowsBottom + 6;
+    const plotW = W - L - R;
+    const x = h => L + h / 24 * plotW;
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
 
-      // Small tick mark
-      const tick = document.createElementNS(svgNS, 'line');
-      tick.setAttribute('x1', cx);
-      tick.setAttribute('x2', cx);
-      tick.setAttribute('y1', bottomY + 4);
-      tick.setAttribute('y2', bottomY + 12);
-      tick.setAttribute('stroke', 'rgba(185,199,209,0.2)');
-      tick.setAttribute('stroke-width', 1);
-      svg.appendChild(tick);
+    [0, 6, 12, 18, 24].forEach(v => {
+      const gx = x(v);
+      svgEl('line', {x1: gx, x2: gx, y1: plotTop-6, y2: rowsBottom,
+        stroke: v === 24 ? 'rgba(239,185,76,0.22)' : 'rgba(185,199,209,0.12)',
+        'stroke-width': 1, 'stroke-dasharray': v === 24 ? '4,4' : 'none'}, svg);
+      const t = svgEl('text', {x: gx, y: plotTop-12, class: 'tl-axis'}, svg);
+      t.style.textAnchor = 'middle';
+      t.textContent = v + ' h';
     });
 
-    // Observer to trigger animation
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          svg.classList.add('chart-in');
-          // Animate bars with scaleY
-          svg.querySelectorAll('.tl-bar, .tl-bar-high').forEach(el => {
-            el.style.transform = 'scaleY(1)';
-          });
-          io.unobserve(svg);
-        }
-      });
-    }, { threshold: 0.2 });
-    io.observe(svg);
+    daylightData.forEach((d, i) => {
+      const cy = plotTop + i*rowH + rowH/2;
+      const isHigh = d.h >= 20;
+      const w = d.h / 24 * plotW;
+      const rect = svgEl('rect', {x: L, y: cy-barT/2, width: w, height: barT, rx: 3,
+        class: isHigh ? 'tl-bar-high' : 'tl-bar'}, svg);
+      rect.style.setProperty('--i', i);
+      rect.style.transformBox = 'fill-box';
+      rect.style.transformOrigin = 'left center';
+      rect.style.transform = 'scaleX(0)';
+      const valLbl = svgEl('text', {x: L+w+6, y: cy+4, class: isHigh ? 'tl-label-high' : 'tl-label'}, svg);
+      valLbl.style.textAnchor = 'start';
+      valLbl.style.setProperty('--i', i);
+      valLbl.textContent = Math.round(d.h) + ' h';
+      const m = svgEl('text', {x: L-10, y: cy+4, class: 'tl-month'}, svg);
+      m.style.textAnchor = 'end';
+      m.textContent = d.m;
+    });
   }
-  safe('daylightTimeline', buildDaylightTimeline);
+
+  safe('daylightTimeline', function(){
+    const svg = document.getElementById('daylightTimeline');
+    if (!svg) return;
+    responsiveChart(svg,
+      (narrow, w) => narrow ? drawDaylightNarrow(svg, w) : drawDaylightWide(svg),
+      (instant) => {
+        svg.querySelectorAll('.tl-bar, .tl-bar-high').forEach(el => {
+          if (instant) el.style.transition = 'none';
+          el.style.transform = svg.classList.contains('is-narrow') ? 'scaleX(1)' : 'scaleY(1)';
+        });
+      });
+  });
 
   // ---- starfield in hero ----
   // Animaatio pyorii vain kun hero on nakyvissa ja valilehti on aktiivinen.

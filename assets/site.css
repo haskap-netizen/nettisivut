@@ -485,6 +485,19 @@
   @media(max-width:560px){.t-year{font-size:11px;line-height:1.4;padding-right:10px;}.t-body{padding-left:26px;}.t-body::before{left:-31px;}}
   .t-body h4{font-family:var(--body);font-weight:700;font-size:15px;margin-bottom:8px;}
   .t-body p{font-size:14.5px;color:var(--muted-text);line-height:1.75;max-width:600px;}
+  /* Rahoitus (EU/Leader): valkoinen kortti aikajanan alla. Logot ovat yhta korkeat,
+     kuten maaseuturahoituksen viestintaohje edellyttaa. */
+  .funding{margin-top:88px;max-width:782px;background:#fff;border:1px solid rgba(20,32,43,0.10);padding:36px 40px 32px;}
+  .funding .eyebrow{color:var(--berry);margin-bottom:14px;}
+  .funding h3{font-family:var(--body);font-weight:700;font-size:18px;color:var(--ink-text);margin-bottom:14px;}
+  .funding p{font-size:14.5px;color:var(--muted-text);line-height:1.75;margin-bottom:12px;}
+  .funding-logos{display:flex;flex-wrap:wrap;align-items:center;gap:20px 36px;margin-top:26px;padding-top:24px;border-top:1px solid rgba(20,32,43,0.08);}
+  .funding-logos img{height:56px;width:auto;display:block;}
+  @media(max-width:560px){
+    .funding{margin-top:64px;padding:28px 20px 24px;}
+    .funding-logos{gap:16px 24px;}
+    .funding-logos img{height:44px;}
+  }
 
 
   /* ---------- TRAILCAM ---------- */

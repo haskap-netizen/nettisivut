@@ -1425,7 +1425,7 @@ scheduleMapMode();
   // poster-attribuutti ladataan aina heti, myos preload="none":lla, ja video on
   // gallerian lopussa. 78 kt pois hero-kuvan tielta.
   safe('videoPoster', function(){
-    const v = document.querySelector('.gallery-video video[data-poster]');
+    const v = document.querySelector('video[data-poster]');
     if (!v) return;
     const apply = () => { v.poster = v.dataset.poster; v.removeAttribute('data-poster'); };
     if (!('IntersectionObserver' in window)) { apply(); return; }

@@ -567,6 +567,7 @@
     border:1px solid rgba(20,32,43,0.12);
   }
   .g-tile img{position:relative;width:100%;height:auto;object-fit:contain;}
+  .g-tile video{position:relative;display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;background:var(--ink);}
   .g-tile.has-img::before{display:none;}
   .g-tile.has-img .g-caption{color:var(--muted-text);}
   .g-tile.featured{box-shadow:inset 0 0 0 2px var(--aurora);}

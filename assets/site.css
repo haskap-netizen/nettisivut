@@ -196,9 +196,7 @@
   @media(max-width:700px){ .hero-photo img.hero-photo-main{object-position:50% 64%;} }
   .hero::after{
     content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
-    background:
-      radial-gradient(70% 46% at 22% 100%,rgba(239,185,76,.16) 0%,rgba(239,185,76,.08) 60%,transparent 100%),
-      linear-gradient(180deg,transparent 0%,transparent 46%,rgba(31,74,87,.30) 70%,rgba(31,74,87,.94) 100%);
+    background:linear-gradient(180deg,transparent 0%,transparent 50%,rgba(10,20,32,.30) 75%,rgba(10,20,32,.55) 100%);
   }
   /* Kuvan paalla on enaa otsikko, joka on isoa tekstia (raja 3:1). Gradientti
      tarvitaan vain alareunaan: se suojaa otsikon ja sulauttaa kuvan alapuolisen
@@ -247,12 +245,11 @@
     font-weight:400;
   }
   .hero h1 em{font-style:italic;font-weight:400;color:var(--sun);}
-  /* Esittelyteksti ei ole enaa kuvan paalla vaan omalla tummalla kaistallaan
-     heti kuvan alla. Kuvan alareunan gradientti paattyy samaan variin, joten
-     sauma ei nay. */
+  /* Esittelyteksti on omalla vaalealla kaistallaan heti kuvan alla. Kuvan
+     alareunassa on vain kevyt tummennus otsikon luettavuutta varten. */
   .hero-intro{
-    background:linear-gradient(180deg,#1F4A57 0%,#2A5B66 100%);
-    color:#E8EEF2;
+    background:var(--paper);
+    color:var(--ink-text);
     padding:52px 0 64px;
   }
   .hero-intro .wrap{
@@ -268,16 +265,16 @@
     max-width:620px;
     font-size:clamp(17px,1.5vw,19px);
     line-height:1.7;
-    color:#E8EEF2;
+    color:var(--ink-text);
     font-weight:400;
   }
   .hero-meta{
     display:flex;gap:36px;flex-wrap:wrap;
-    font-family:var(--mono);font-size:12px;color:#C9D5DD;
-    padding-top:22px;border-top:1px solid var(--line);
+    font-family:var(--mono);font-size:12px;color:var(--muted-text);
+    padding-top:22px;border-top:1px solid rgba(20,32,43,.15);
   }
   @media(min-width:861px){.hero-meta{flex-direction:column;gap:20px;min-width:210px;}}
-  .hero-meta strong{display:block;color:#fff;font-size:14px;margin-bottom:4px;font-weight:500;}
+  .hero-meta strong{display:block;color:var(--ink-text);font-size:14px;margin-bottom:4px;font-weight:500;}
 
   /* ---------- SEASONS (signature) ---------- */
   .seasons{
